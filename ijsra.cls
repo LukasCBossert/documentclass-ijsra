@@ -24,12 +24,14 @@
 \newcommand*\issueyear{} \edef\issueyear{\the\year}
 \newcommand*\issuevolume{?}
 \newcommand*\issuenumber{??}
+\newcommand*\identifier{??}
 
 
 
 \DeclareOptionX{draft}{\PassOptionsToClass{\CurrentOption}{scrbook}}
 \DeclareOptionX{month}{\def\issuemonth{#1}}
 \DeclareOptionX{year}{\def\issueyear{#1}}
+\DeclareOptionX{identifier}{\def\identifier{#1}}
 \DeclareOptionX{volume}{\def\issuevolume{#1}}
 \DeclareOptionX{number}{\def\issuenumber{#1}}
 \DeclareOptionX*{\OptionNotUsed}
@@ -91,7 +93,8 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	backend=biber,
 	style=ijsra,
 	]{biblatex}
-\addbibresource{\jobname.bib}
+%\addbibresource{\jobname.bib}
+\addbibresource{\identifier.bib}
 
 \RequirePackage{etoolbox}
 \RequirePackage{graphicx}
@@ -232,7 +235,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 
 %-----------------------------------------
-\newcommand\identifier{}
+
 
 \newcommand\ppages{\pagerange{firstpage\identifier}{lastpage\identifier}}
 \newcommand\shorttitle{}
@@ -280,9 +283,12 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	\setcounter{table}{0}
 	\setcounter{figure}{0}
 	\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+	\mychapter{\maintitle}
+	\begin{center}
 	}
 	
 \providecommand\midarticle{%
+	\end{center}
 	\vspace{3em}
 	\pagestyle{scrheadings}	
 	\setcounter{footnote}{0}

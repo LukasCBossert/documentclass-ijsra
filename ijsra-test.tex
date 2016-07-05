@@ -1,10 +1,23 @@
 \documentclass[
+	identifier=\jobname,
 	year=2016,
 	month=October,
 	number=1,
 	volume=2,
 	]{ijsra}
-\begin{filecontents}{\jobname.bib}
+
+
+%\def\identifier{Forssman}
+\def\shorttitle{Late Holocine Rockshelter, Botswana}
+\def\maintitle{The Late Holocene Occupation of Mafunyane Shelter, Eastern Botswana}
+\def\shortauthor{Tim Forssman}
+\def\authormail{tim.forssman@gmail.com}
+\def\affiliation{University of the Witwatersrand (South Africa)}
+\def\thanknote{Postdoctoral Researcher at the Rock Art Research Institute, School of Geography, Archaeology and Environmental Studies,; This paper is the product of DPhil research carried out at the University of Oxford (UK)}
+%--------------------------------------------------------------
+
+
+\begin{filecontents}{\identifier.bib}
 
 @thesis{Alexander_1984,
   author = {Alexander, G. J.},
@@ -122,26 +135,14 @@ pages   = "67-84"
 
 \end{filecontents}
 
-\def\identifier{Forssman}
-\def\shorttitle{Late Holocine Rockshelter, Botswana}
-\def\maintitle{The Late Holocene Occupation of Mafunyane Shelter, Eastern Botswana}
-\def\shortauthor{Tim Forssman}
-\def\authormail{tim.forssman@gmail.com}
-\def\affiliation{University of the Witwatersrand (South Africa)}
-\def\thanknote{Postdoctoral Researcher at the Rock Art Research Institute, School of Geography, Archaeology and Environmental Studies,; This paper is the product of DPhil research carried out at the University of Oxford (UK)}
-%--------------------------------------------------------------
-
 \begin{document}
-%\tableofcontents
 \openingarticle
 
-\mychapter{\maintitle}
-\begin{center}
 	{\Large\scshape
-	\shortauthor}\footnote{\thanknote}\protect\\[1em]
-	\email \protect\\
+	\shortauthor\footnote{\thanknote}}\\[1em]
+	\email\\
 	\affiliation
-\end{center}
+
 \midarticle
 
 \begin{abstract}\noindent%
