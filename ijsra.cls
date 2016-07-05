@@ -20,20 +20,19 @@
 \RequirePackage{ifxetex,ifluatex,ifpdf,ifvtex}
 \RequirePackage{xkeyval}
 
-\newcommand*\issuemonth{??}
-\newcommand*\issueyear{} \edef\issueyear{\the\year}
-\newcommand*\issuevolume{?}
-\newcommand*\issuenumber{??}
-\newcommand*\identifier{??}
+\newcommand*\issuemonth{\scshape proof}
+\newcommand*\issueyear{\scshape proof}% \edef\issueyear{\the\year}
+\newcommand*\issuevolume{\scshape proof}
+\newcommand*\issuenumber{\scshape proof}
+\newcommand*\identifier{\jobname}
 
 
 
 \DeclareOptionX{draft}{\PassOptionsToClass{\CurrentOption}{scrbook}}
 \DeclareOptionX{month}{\def\issuemonth{#1}}
 \DeclareOptionX{year}{\def\issueyear{#1}}
-\DeclareOptionX{identifier}{\def\identifier{#1}}
-\DeclareOptionX{volume}{\def\issuevolume{#1}}
-\DeclareOptionX{number}{\def\issuenumber{#1}}
+\DeclareOptionX{volume}{\def\issuevolume{Vol.\addspace #1}}
+\DeclareOptionX{number}{\def\issuenumber{No.\addspace #1}}
 \DeclareOptionX*{\OptionNotUsed}
 \ProcessOptionsX\relax
 
@@ -73,6 +72,8 @@
 \RequirePackage{marginnote}
 \RequirePackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
 \RequirePackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
+\RequirePackage{currfile}
+\RequirePackage{currfile-abspath}
 
 \RequirePackage[
 detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
@@ -93,8 +94,8 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	backend=biber,
 	style=ijsra,
 	]{biblatex}
-%\addbibresource{\jobname.bib}
-\addbibresource{\identifier.bib}
+\addbibresource{\jobname.bib}
+
 
 \RequirePackage{etoolbox}
 \RequirePackage{graphicx}
@@ -150,7 +151,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \clearscrheadfoot
 
 \lohead[\normalfont\sffamily\footnotesize International Journal of Student Research in Archaeology (IJSRA) \newline 
-\normalfont\sffamily\footnotesize \issuemonth\ \issueyear\ $\bullet$ Vol. \issuevolume, No. \issuenumber \ppages]{\normalfont\sffamily\footnotesize \shorttitle\ \ppages}
+\normalfont\sffamily\footnotesize \issuemonth\ \issueyear\ $\bullet$ \issuevolume, \issuenumber \ppages]{\normalfont\sffamily\footnotesize \shorttitle\ \ppages}
 \rehead{\normalfont\sffamily\footnotesize \shortauthor}
 \rohead[{{\vspace{-3em}\includegraphics[width=2cm]{ijsra_logo}}}]{\normalfont\textbf{\sffamily\thepage}}
 \lehead{\normalfont\textbf{\sffamily\thepage}}
@@ -247,9 +248,9 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 
   
-\newenvironment{abstract}
+\newenvironment{myabstract}
 {\list{}{\rightmargin\leftmargin}%
-	\footnotesize\itshape\item\relax}
+	\footnotesize\itshape\item\relax\noindent}
 {\endlist}
 
 \newcommand{\myseparator}{
