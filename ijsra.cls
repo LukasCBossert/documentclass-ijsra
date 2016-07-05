@@ -115,6 +115,11 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \definecolor{myblue}{rgb}{0,0,51}
 \definecolor{mygold}{RGB}{204,153,51}
 
+\definecolor{codeblue}{RGB}{0,65,137}
+\definecolor{codegreen}{RGB}{147,193,26}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \RequirePackage{pdfpages}
 %-----------------------------------------
@@ -144,7 +149,11 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \RequirePackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
 \RequirePackage{nth}
 
+\RequirePackage{caption}
 \RequirePackage{chngcntr} %Voraussetzung fuer Fussnoten durch alle Kapitel durchnummerieren
+\RequirePackage{listings}
+\AtBeginDocument{\counterwithin{lstlisting}{chapter}}
+
 \counterwithout{footnote}{chapter} %Fussnoten durch alle Kapitel durchnummerieren
 \counterwithout{figure}{chapter}
 \counterwithout{table}{chapter}
@@ -198,11 +207,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \deffootnote{0em}{1em}{{\sffamily\textbf\thefootnotemark}\ }%Ausgabe der Fußnotenziffer in normal
 %--------------------------------------
-
-
-
 \robustify{\DateMark} % after having loaded abbrevs
-
 
 
 \ifstr{\KOMAScriptVersion}{2015/07/02 v3.18 KOMA-Script}{%
@@ -213,14 +218,8 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \renewcommand{\marginfont}{%
 	\normalfont\small\sffamily}
-	
-
-
 %-------------------------------------------
-
-
 %---Zitate/Quote
-
 \def\signed #1{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
 	\hbox{}\nobreak\hfil%
 	---#1%
@@ -239,12 +238,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 }
 \AtBeginEnvironment{quote}{\if@in@footnote@\else\small\fi}
 \makeatother
-
-
-
 %-----------------------------------------
-
-
 \newcommand\ppages{\pagerange{firstpage\IJSRAidentifier}{lastpage\IJSRAidentifier}}
 \newcommand\shorttitle{}
 \newcommand\maintitle{}
@@ -254,11 +248,6 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \newcommand\thanknote{}
 \def\keywords{}
 \def\keywordname{Keywords}
-%\newcommand\keywords[2]{ #1: #2}
-  
-%\providecommand{\keywords}[2][Keywords]{{\normalfont{\sffamily\textbf{#1:}}\  #2}}
-%\def{\keywords}[2][Keywords]{{\normalfont{\sffamily\textbf{#1:}}\  #2}}
-
 
 \newenvironment{IJSRAabstract}
 {\list{}{\rightmargin\leftmargin}%
@@ -291,8 +280,6 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 		\tempa--\tempb}}
 
 
-
-
 \providecommand\IJSRAopening{%
 	\begin{refsection}
 	\setcounter{footnote}{0}
@@ -318,9 +305,63 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	\label{lastpage\IJSRAidentifier}
 }
 
+ \DeclareCaptionFormat{listing}{#1#2#3}
+ \captionsetup[lstlisting]{format=listing,%
+ 			 singlelinecheck=false, 
+ 			 margin=0pt, 
+ 			 font={sf},
+ 			 size=footnotesize}
+ 
+
+
+\renewcommand{\lstlistingname}{Example}%rename caption
+\renewcommand{\lstlistlistingname}{List of examples}%rename caption
+
+
+\lstdefinestyle{code}{%
+	language=[LaTeX]TeX,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    escapeinside={*@}{@*},          % if you want to add LaTeX within your code
+    texcsstyle=*\color{codeblue},
+    morekeywords={cites, parencites, parencite, textcite, textcites, citeauthor, citetitle,@String,
+    						@Article, @Book,@Collection,@Proceedings,@Reference,@Thesis,
+    						@Inproceedings,@Talk,@Review,@Inreference,@Incollection,
+    						},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,   
+    numberbychapter=false,   
+    captionpos=b,                    
+    keepspaces=true,               
+	%framexleftmargin=5mm, 
+	%frame=shadowbox,
+	rulesepcolor=\color{codeblue},
+    numbers=left,                    
+    numbersep=5pt,            
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    literate=
+            *{\{}{{{\color{codegreen}{\{}}}}{1}
+            {\}}{{{\color{codegreen}{\}}}}}{1}
+            {[}{{{\color{codegreen}{[}}}}{1}
+            {]}{{{\color{codegreen}{]}}}}{1},
+}
+
+
+\lstset{style=code}
+%\lstMakeShortInline[style=code]{|}
+%
+
+
 %------------------------------------
 
-\usepackage{hyperref} % For hyperlinks in the PDF
+\RequirePackage{hyperref} % For hyperlinks in the PDF
 \hypersetup{					% setup the hyperref-package options
 	colorlinks   = true, %Colours links instead of ugly boxes
 	urlcolor     =  myblue, %Colour for external hyperlinks
@@ -335,6 +376,6 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	final=true	% = true, only with web-Documents!!
 }
 
-\usepackage{cleveref}
+\RequirePackage{cleveref}
 
 \endinput

@@ -47,10 +47,58 @@
 
 \begin{IJSRAabstract}%
 This is a documentation of the class.
-%\keywords
+
 \end{IJSRAabstract}
 
 \IJSRAseparator
+
+\lettrine[nindent=0em,lines=3]{H}{ow}  to start the article\marginnote{starting}
+\clearpage
+\begin{lstlisting}[label=document,caption={Plain document}]
+\documentclass{ijsra}
+\def\IJSRAidentifier{\currfilebase}
+\def\shorttitle{}
+\def\maintitle{}
+\def\shortauthor{}
+\def\authormail{}
+\def\affiliation{}
+\def\thanknote{}
+\def\keywords{}
+%\def\keywordname{}
+\begin{filecontents}{\IJSRAidentifier.bib}
+Bibliography-files
+\end{filecontents}
+
+\begin{document}
+\IJSRAopening
+	{\Large\scshape
+	\shortauthor}%
+	\footnote\thanknote%
+	\\[1em]
+	\email\\
+	\affiliation
+\IJSRAmid
+
+\begin{IJSRAabstract}
+Abstract
+\end{IJSRAabstract}
+
+MAIN TEXT
+
+\IJSRAclosing
+\end{document}
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[label=lettrine,caption={start}]
+\lettrine[nindent=0em,lines=3]{H}{ow}
+\end{lstlisting}
+\clearpage
+How to do figures\marginnote{figures}
+
+\clearpage
+How to do quotes\marginnote{quotes}
 
 \begin{IJSRAquote}{me}
 greatgreatgreatgreatgreatgrea
@@ -59,6 +107,37 @@ tgreatgreatgreatgreatgreatgrea
 tgreatgreatgreatgreatgreatgreatgreatgreatgreatgreatgreatgreat
 \end{IJSRAquote}
 
+\begin{lstlisting}[label=quote,caption={Quote}]
+\begin{IJSRAquote}{me}
+greatgreatgreatgreatgreatgrea
+greatgreatgreatgreatgreatgrea
+tgreatgreatgreatgreatgreatgrea
+tgreatgreatgreatgreatgreatgreatgreatgreatgreatgreatgreatgreat
+\end{IJSRAquote}
+\end{lstlisting}
+
+\clearpage
+How to cite \marginnote{citing}
+
+
+
+\clearpage
+How to cite \marginnote{citing}
+
+\begin{lstlisting}[label=Bossert-ijsra,caption={{@}Article\{Bossert-ijsra,…\} }]
+@Article{Bossert-ijsra,
+  author    = {Lukas C. Bossert},
+  title     = {›ijsra‹ -- bib\LaTeX-style which is used for the \emph{International Journal of Student Research in Archaeology}},
+  subtitle  = {Version: 0.1},
+  url       = {http://www.ctan.org/pkg/biblatex-ijsra},
+  keywords  = {latex},
+  note      = {https://github.com/LukasCBossert/biblatex-ijsra},
+  owner     = {Lukas C. Bossert},
+  timestamp = {2016-07-04},
+}
+\end{lstlisting}
+
+\clearpage
 \nocite{*}
 \IJSRAclosing
 \end{document}
