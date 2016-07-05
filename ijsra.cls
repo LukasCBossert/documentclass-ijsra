@@ -20,19 +20,24 @@
 \RequirePackage{ifxetex,ifluatex,ifpdf,ifvtex}
 \RequirePackage{xkeyval}
 
-\newcommand*\issuemonth{\scshape proof}
-\newcommand*\issueyear{\scshape proof}% \edef\issueyear{\the\year}
-\newcommand*\issuevolume{\scshape proof}
-\newcommand*\issuenumber{\scshape proof}
-\newcommand*\identifier{\jobname}
+\def\IJSRAversion{0.1}
+\def\IJSRAversiondate{2016/07/07}
+
+
+
+\newcommand*\IJSRAmonth{\scshape proof}
+\newcommand*\IJSRAyear{\scshape proof}% \edef\issueyear{\the\year}
+\newcommand*\IJSRAvolume{\scshape proof}
+\newcommand*\IJSRAnumber{\scshape proof}
+\newcommand*\IJSRAidentifier{\jobname}
 
 
 
 \DeclareOptionX{draft}{\PassOptionsToClass{\CurrentOption}{scrbook}}
-\DeclareOptionX{month}{\def\issuemonth{#1}}
-\DeclareOptionX{year}{\def\issueyear{#1}}
-\DeclareOptionX{volume}{\def\issuevolume{Vol.\addspace #1}}
-\DeclareOptionX{number}{\def\issuenumber{No.\addspace #1}}
+\DeclareOptionX{month}{\def\IJSRAmonth{#1}}
+\DeclareOptionX{year}{\def\IJSRAyear{#1}}
+\DeclareOptionX{volume}{\def\IJSRAvolume{Vol.\addspace #1}}
+\DeclareOptionX{number}{\def\IJSRAnumber{No.\addspace #1}}
 \DeclareOptionX*{\OptionNotUsed}
 \ProcessOptionsX\relax
 
@@ -54,6 +59,7 @@
 
 \RequirePackage{filecontents}
 \RequirePackage{libertine}
+\renewcommand*\ttdefault{lmvtt}
 \RequirePackage[main=english]{babel}
 
 \ifxetex\else
@@ -74,6 +80,7 @@
 \RequirePackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
 \RequirePackage{currfile}
 \RequirePackage{currfile-abspath}
+
 
 \RequirePackage[
 detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
@@ -151,12 +158,12 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \clearscrheadfoot
 
 \lohead[\normalfont\sffamily\footnotesize International Journal of Student Research in Archaeology (IJSRA) \newline 
-\normalfont\sffamily\footnotesize \issuemonth\ \issueyear\ $\bullet$ \issuevolume, \issuenumber \ppages]{\normalfont\sffamily\footnotesize \shorttitle\ \ppages}
+\normalfont\sffamily\footnotesize \IJSRAmonth\ \IJSRAyear\ $\bullet$ \IJSRAvolume, \IJSRAnumber \ppages]{\normalfont\sffamily\footnotesize \shorttitle\ \ppages}
 \rehead{\normalfont\sffamily\footnotesize \shortauthor}
 \rohead[{{\vspace{-3em}\includegraphics[width=2cm]{ijsra_logo}}}]{\normalfont\textbf{\sffamily\thepage}}
 \lehead{\normalfont\textbf{\sffamily\thepage}}
 \refoot{\normalfont\sffamily\footnotesize International Journal of Student Research in Archaeology}
-\lofoot{\normalfont\sffamily\footnotesize \issuemonth\ \issueyear\ $\bullet$ Vol. \issuevolume, No. \issuenumber}
+\lofoot{\normalfont\sffamily\footnotesize \IJSRAmonth\ \IJSRAyear\ $\bullet$ \IJSRAvolume, No. \IJSRAnumber}
 \automark[subsection]{section}  
 
 %-----------------------------
@@ -210,7 +217,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 
 %-------------------------------------------
-\providecommand{\keywords}[2][Keywords]{{\normalfont{\sffamily\textbf{#1:}}\  #2}}
+
 
 %---Zitate/Quote
 
@@ -220,7 +227,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	\parfillskip=0pt \finalhyphendemerits=0 \endgraf}
 
 \newsavebox\mybox
-\newenvironment{aquote}[1]%
+\newenvironment{IJSRAquote}[1]%
 {\savebox\mybox{#1}\begin{quote}}
 	{\signed{\usebox\mybox}\end{quote}}
 
@@ -238,29 +245,37 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 %-----------------------------------------
 
 
-\newcommand\ppages{\pagerange{firstpage\identifier}{lastpage\identifier}}
+\newcommand\ppages{\pagerange{firstpage\IJSRAidentifier}{lastpage\IJSRAidentifier}}
 \newcommand\shorttitle{}
 \newcommand\maintitle{}
 \newcommand\shortauthor{}
 \newcommand\authormail{}
 \newcommand\affiliation{}
 \newcommand\thanknote{}
-
-
+\def\keywords{}
+\def\keywordname{Keywords}
+%\newcommand\keywords[2]{ #1: #2}
   
-\newenvironment{myabstract}
+%\providecommand{\keywords}[2][Keywords]{{\normalfont{\sffamily\textbf{#1:}}\  #2}}
+%\def{\keywords}[2][Keywords]{{\normalfont{\sffamily\textbf{#1:}}\  #2}}
+
+
+\newenvironment{IJSRAabstract}
 {\list{}{\rightmargin\leftmargin}%
-	\footnotesize\itshape\item\relax\noindent}
+\item \normalsize\sffamily\textbf\keywordname :  \keywords\\
+	\footnotesize\itshape
+	\noindent\item\relax
+	}
 {\endlist}
 
-\newcommand{\myseparator}{
+\newcommand{\IJSRAseparator}{
 	\vspace{2em}
 	\begin{center}
 		* * *
 	\end{center}
 	\vspace{2em}}
 
-\newcommand{\mychapter}[1]{
+\newcommand{\IJSRAchapter}[1]{
 	\setcounter{chapter}{1}
 	\chapter*{#1}
 	\addcontentsline{toc}{chapter}{\shortauthor\protect\newline \maintitle}
@@ -278,30 +293,29 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 
 
-\providecommand\openingarticle{%
+\providecommand\IJSRAopening{%
 	\begin{refsection}
 	\setcounter{footnote}{0}
 	\setcounter{table}{0}
 	\setcounter{figure}{0}
 	\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
-	\mychapter{\maintitle}
+	\IJSRAchapter{\maintitle}
 	\begin{center}
 	}
 	
-\providecommand\midarticle{%
+\providecommand\IJSRAmid{%
 	\end{center}
 	\vspace{3em}
 	\pagestyle{scrheadings}	
 	\setcounter{footnote}{0}
 	\renewcommand*{\thefootnote}{\arabic{footnote}}
-	\label{firstpage\identifier}
+	\label{firstpage\IJSRAidentifier}
 	}
 	
-\providecommand\closingarticle{%
+\providecommand\IJSRAclosing{%
 	\printbibliography[heading=subbibliography] 
 	\end{refsection}
-	\label{lastpage\identifier}
-	%\clearpage
+	\label{lastpage\IJSRAidentifier}
 }
 
 %------------------------------------

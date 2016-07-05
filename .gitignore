@@ -22,3 +22,7 @@
 *.aux
 
 .bib
+
+beispiel.tex
+
+*.gz(busy)

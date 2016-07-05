@@ -1,0 +1,64 @@
+\documentclass[
+%	year=2016,
+%	month=October,
+%	number=1,
+%	volume=2,
+	]{ijsra}
+\def\IJSRAidentifier{\currfilebase}
+
+
+\def\shorttitle{The \texttt{ijsra}-class, Version \IJSRAversion\ -- \IJSRAversiondate}
+\def\maintitle{The \texttt{ijsra}-class, Version \IJSRAversion\ -- \IJSRAversiondate}
+\def\shortauthor{Lukas C. Bossert}
+\def\authormail{lukas@digitales-altertum.de}
+\def\affiliation{Humboldt-Universität zu Berlin | Excellence-Cluster Topoi}
+\def\thanknote{The coding of this documentclass is done at \href{https://github.com/LukasCBossert/documentclass-ijsra}{https://github.com/LukasCBossert/documentclass-ijsra} }
+%\def\keywordname{hello}
+\def\keywords{documentclass, \LaTeX , IJSRA}
+%--------------------------------------------------------------
+
+
+\begin{filecontents}{\IJSRAidentifier.bib}
+@Article{Bossert-ijsra,
+  author    = {Lukas C. Bossert},
+  title     = {›ijsra‹ -- bib\LaTeX-style which is used for the \emph{International Journal of Student Research in Archaeology}},
+  subtitle  = {Version: 0.1},
+  url       = {http://www.ctan.org/pkg/biblatex-ijsra},
+  keywords  = {latex},
+  note      = {https://github.com/LukasCBossert/biblatex-ijsra},
+  owner     = {Lukas C. Bossert},
+  timestamp = {2016-07-04},
+}
+
+
+\end{filecontents}
+
+\begin{document}
+\IJSRAopening
+
+	{\Large\scshape
+	\shortauthor}%
+	\footnote\thanknote%
+	\\[1em]
+	\email\\
+	\affiliation
+
+\IJSRAmid
+
+\begin{IJSRAabstract}%
+This is a documentation of the class.
+%\keywords
+\end{IJSRAabstract}
+
+\IJSRAseparator
+
+\begin{IJSRAquote}{me}
+greatgreatgreatgreatgreatgrea
+greatgreatgreatgreatgreatgrea
+tgreatgreatgreatgreatgreatgrea
+tgreatgreatgreatgreatgreatgreatgreatgreatgreatgreatgreatgreat
+\end{IJSRAquote}
+
+\nocite{*}
+\IJSRAclosing
+\end{document}
