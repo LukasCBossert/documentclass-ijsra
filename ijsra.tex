@@ -46,14 +46,110 @@
 \IJSRAmid
 
 \begin{IJSRAabstract}%
-This is a documentation of the class.
-
+This is a documentation of the class \texttt{ijsra} which is used for the
+ \emph{International Journal of Student Research in Archaeology}.
 \end{IJSRAabstract}
 
-\IJSRAseparator
+%\IJSRAseparator
 
-\lettrine[nindent=0em,lines=3]{H}{ow}  to start the article\marginnote{starting}
+\lettrine[nindent=0em,lines=3]{E}{very}  article\marginnote{starting} starts with a lettrine as the first letter.
+This bigger letter functions as an eye catcher to make clear where the article starts.
+It effects the whole word: The first letter reaches down to the third line, the other letters of the word are capitalised. 
+In \cref{lettrine} you see the code how this is achieved.
+
+ \begin{lstlisting}[label=lettrine,caption={Starting letter}]
+\lettrine[nindent=0em,lines=3]{E}{very} article ... 
+\end{lstlisting}
+If you have a letter which is rather slanted you can define the slope. 
+Let’s have a look at the letter ›A‹.
+ \begin{lstlisting}[label=lettrine,caption={Starting letter ›A‹}]
+\lettrine[slope=4pt,findent=-3pt,lines=3]{A}{rchaeologists}  …
+\end{lstlisting}
+And it changes of course if we start the article with a ›W‹. 
+ \begin{lstlisting}[label=lettrine,caption={Starting letter ›W‹}]
+\lettrine[slope=-4pt,nindent=-4pt,lines=3]{W}{hen} ...
+\end{lstlisting}
+
+Each article contains several information about the author, title, etc. 
+This is done with some definitions. 
+You have to fill in the information in the curly brackets.
+\begin{lstlisting}[label=information,caption={Information about the article}]
+\def\IJSRAidentifier{\currfilebase} %<---- don’t change this!
+\def\shorttitle{} %<---- this is for the short title
+\def\maintitle{} %<---- full title
+\def\shortauthor{} %<---- full name of the author
+\def\authormail{} %<--- email address name@email.com
+\def\affiliation{} %<--- university or institution
+\def\thanknote{} %<--- further information regarding the author
+\def\keywords{} %<---- keywords describing the article
+%\def\keywordname{} %<---- name of keywords in an other language
+\end{lstlisting}
+
+After the definitions there is the block regarding the bibliographical entries.
+Those are written in the section 
+\begin{lstlisting}[label=bibliography,caption={Bibliographical information}]
+\begin{filecontents}{\IJSRAidentifier.bib} %<--- don’t change this
+
+@Incollection{Orengo2015,
+  author       = {Orengo, H.},
+  title        = {Open Source GIS and Geospatial Software in Archaeology},
+  subtitle     = {Towards Their Integration into Everyday Archaeological Practice},
+  pages        = {64--82},
+  editor       = {Wilson, A. T. and Edwards, B.},
+  booktitle    = {Open Source Archaeology},
+  booksubtitle = {Ethics and Practice},
+  publisher    = {deGruynter Open},
+  location     = {Warsaw},
+  year         = {2015},
+}
+
+@Article{Pikirayi2015,
+  author       = {Pikirayi, I.},
+  title        = {The Future of Archaeology in Africa},
+  journaltitle = {Antiquity},
+  volume       = {89},
+  pages        = {531--541},
+  year         = {2015},
+  issue        = {345},
+}
+.
+.
+.
+
+\end{filecontents}
+\end{lstlisting}
+
+After that we have completed the preamble and get to main part of the document.
+Here we define the layout of the headline.
+
+\begin{lstlisting}[label=headline,caption={Headline layout}]
+\IJSRAopening %<---- don’t change or forget this
+	{\Large\scshape
+	\shortauthor}%
+	\footnote\thanknote% 
+	\\[1em]
+	\email\\
+	\affiliation
+\IJSRAmid %<---- don’t change or forget this
+\end{lstlisting}
+If there is no \texttt{thanknote} you only have to comment line no. 4 and there will be no footnote.
+
+After that we come to the abstract. 
+The abstract is set in the enviroment \texttt{IJSRAabstract}:
+\begin{lstlisting}[label=abstract,caption={IJSRAabstract}]
+\begin{IJSRAabstract}
+Abstract
+\end{IJSRAabstract}
+\end{lstlisting}
+
+Then you can copy/paste the text of the article and make further editing.
+At the very end you have to insert 
+\begin{lstlisting}[label=closing,caption={IJSRAclosing}]
+\IJSRAclosing
+\end{lstlisting}
+
 \clearpage
+Following there is a minimal template how the plain document should look like when you begin to edit.
 \begin{lstlisting}[label=document,caption={Plain document}]
 \documentclass{ijsra}
 \def\IJSRAidentifier{\currfilebase}
@@ -83,19 +179,15 @@ Bibliography-files
 Abstract
 \end{IJSRAabstract}
 
-MAIN TEXT
+\lettrine[nindent=0em,lines=3]{M}{ain} text ... 
+
 
 \IJSRAclosing
 \end{document}
 \end{lstlisting}
-
-
-
-\begin{lstlisting}[label=lettrine,caption={start}]
-\lettrine[nindent=0em,lines=3]{H}{ow}
-\end{lstlisting}
 \clearpage
-How to do figures\marginnote{figures}
+Let’s have a look how to do certain editing.
+We start with the figures,\marginnote{figures}
 
 \clearpage
 How to do quotes\marginnote{quotes}

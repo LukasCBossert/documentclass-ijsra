@@ -378,4 +378,5 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \RequirePackage{cleveref}
 
+
 \endinput
