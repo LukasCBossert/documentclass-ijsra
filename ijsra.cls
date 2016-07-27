@@ -21,7 +21,7 @@
 \RequirePackage{xkeyval}
 
 \def\IJSRAversion{0.1}
-\def\IJSRAversiondate{2016/07/07}
+\def\IJSRAversiondate{2016/07/27}
 
 
 
@@ -355,7 +355,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 
 \lstset{style=code}
-%\lstMakeShortInline[style=code]{|}
+%\lstMakeShortInline[style=code]|
 %
 
 

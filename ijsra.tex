@@ -19,21 +19,45 @@
 
 
 \begin{filecontents}{\IJSRAidentifier.bib}
+@Incollection{Orengo2015,
+  author       = {Orengo, H.},
+  title        = {Open Source GIS and Geospatial Software in Archaeology},
+  subtitle     = {Towards Their Integration into Everyday Archaeological Practice},
+  pages        = {64--82},
+  editor       = {Wilson, A. T. and Edwards, B.},
+  booktitle    = {Open Source Archaeology},
+  booksubtitle = {Ethics and Practice},
+  publisher    = {deGruyter Open},
+  location     = {Warsaw},
+  year         = {2015},
+}
+
+@Article{Pikirayi2015,
+  author       = {Pikirayi, I.},
+  title        = {The Future of Archaeology in Africa},
+  journaltitle = {Antiquity},
+  volume       = {89},
+  pages        = {531--541},
+  year         = {2015},
+  issue        = {345},
+}
+
 @Article{Bossert-ijsra,
   author    = {Lukas C. Bossert},
   title     = {›ijsra‹ -- bib\LaTeX-style which is used for the \emph{International Journal of Student Research in Archaeology}},
   subtitle  = {Version: 0.1},
   url       = {http://www.ctan.org/pkg/biblatex-ijsra},
   keywords  = {latex},
+  year ={2016},
   note      = {https://github.com/LukasCBossert/biblatex-ijsra},
   owner     = {Lukas C. Bossert},
   timestamp = {2016-07-04},
 }
 
-
 \end{filecontents}
 
 \begin{document}
+\lstMakeShortInline[style=code]|
 \IJSRAopening
 
 	{\Large\scshape
@@ -48,6 +72,8 @@
 \begin{IJSRAabstract}%
 This is a documentation of the class \texttt{ijsra} which is used for the
  \emph{International Journal of Student Research in Archaeology}.
+ Read this documentation carefully.
+ When you start editing do it according to the structure shown in \cref{document}.
 \end{IJSRAabstract}
 
 %\IJSRAseparator
@@ -98,7 +124,7 @@ Those are written in the section
   editor       = {Wilson, A. T. and Edwards, B.},
   booktitle    = {Open Source Archaeology},
   booksubtitle = {Ethics and Practice},
-  publisher    = {deGruynter Open},
+  publisher    = {deGruyter Open},
   location     = {Warsaw},
   year         = {2015},
 }
@@ -111,6 +137,17 @@ Those are written in the section
   pages        = {531--541},
   year         = {2015},
   issue        = {345},
+}
+
+@Article{Bossert-ijsra,
+  author    = {Lukas C. Bossert},
+  title     = {›ijsra‹ -- bib\LaTeX-style which is used for the \emph{International Journal of Student Research in Archaeology}},
+  subtitle  = {Version: 0.1},
+  url       = {http://www.ctan.org/pkg/biblatex-ijsra},
+  keywords  = {latex},
+  note      = {https://github.com/LukasCBossert/biblatex-ijsra},
+  owner     = {Lukas C. Bossert},
+  timestamp = {2016-07-04},
 }
 .
 .
@@ -187,49 +224,40 @@ Abstract
 \end{lstlisting}
 \clearpage
 Let’s have a look how to do certain editing.
-We start with the figures,\marginnote{figures}
 
-\clearpage
-How to do quotes\marginnote{quotes}
-
-\begin{IJSRAquote}{me}
-greatgreatgreatgreatgreatgrea
-greatgreatgreatgreatgreatgrea
-tgreatgreatgreatgreatgreatgrea
-tgreatgreatgreatgreatgreatgreatgreatgreatgreatgreatgreatgreat
+How to do quotes:\marginnote{quotes}
+For that we use the enviroment |IJSRAquote| and 
+\begin{IJSRAquote}{author of the quote}
+paste the quote here
 \end{IJSRAquote}
-
 \begin{lstlisting}[label=quote,caption={Quote}]
-\begin{IJSRAquote}{me}
-greatgreatgreatgreatgreatgrea
-greatgreatgreatgreatgreatgrea
-tgreatgreatgreatgreatgreatgrea
-tgreatgreatgreatgreatgreatgreatgreatgreatgreatgreatgreatgreat
+\begin{IJSRAquote}{author of the quote}
+paste the quote here
 \end{IJSRAquote}
 \end{lstlisting}
 
-\clearpage
-How to cite \marginnote{citing}
+For other things e.g. figures or citing, please have a look at other documentations or
 
+Some general information:
+\begin{itemize}
+\item Be aware of different brackets, e.g. |[] {}|;
+These are part of \LaTeX -programming-language, every opening bracket needs a closing one.
+\item Replace e.g. |19 %| with |\SI{19}{\percent}| otherwise everything after |%| will be omitted by \LaTeX;
+\item Replace |&| with |\&|; same with other units, e.g. meter: |100 m| has to be written as |\SI{100}{\meter}|;
+\item Replace the citation of authors (e.g |Blesser \& Salter 2006|) with |\cite{Blesser2006}|;
+	 if you have a page-range write: 	|\cite[23--45]{Blesser2006}|;
+\item To compile with bibliography-references;
+use 1 $\times$ Xe\LaTeX, then the 1 $\times$ compiler ›biber‹, then 1 $\times$ Xe\LaTeX.
+\end{itemize}
 
+If you want to know how to cite properly
+please have a look at the documentation of \texttt{biblatex-ijsra}.\footnote{\cite[see][]{Bossert-ijsra};\\ \url{http://mirrors.ctan.org//macros/latex/contrib/biblatex-contrib/biblatex-ijsra/biblatex-ijsra.pdf}}
 
-\clearpage
-How to cite \marginnote{citing}
-
-\begin{lstlisting}[label=Bossert-ijsra,caption={{@}Article\{Bossert-ijsra,…\} }]
-@Article{Bossert-ijsra,
-  author    = {Lukas C. Bossert},
-  title     = {›ijsra‹ -- bib\LaTeX-style which is used for the \emph{International Journal of Student Research in Archaeology}},
-  subtitle  = {Version: 0.1},
-  url       = {http://www.ctan.org/pkg/biblatex-ijsra},
-  keywords  = {latex},
-  note      = {https://github.com/LukasCBossert/biblatex-ijsra},
-  owner     = {Lukas C. Bossert},
-  timestamp = {2016-07-04},
-}
-\end{lstlisting}
-
-\clearpage
 \nocite{*}
+\printbibliography
+\clearpage
+You find the code using to write this documentation below.
+
+\lstinputlisting[language={[AlLaTeX]{TeX}}]{\jobname.tex}
 \IJSRAclosing
 \end{document}
