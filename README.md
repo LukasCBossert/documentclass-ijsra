@@ -1,13 +1,13 @@
 document class __ijsra__    
 ======= 
 
-_2016/07/27 v0.1_
+_2016/07/28 v0.1a_
 
 Copyright (c) 2016 Lukas C. Bossert 
 
 Email: [lukas@digitales-altertum.de](mailto:lukas@digitales-altertum.de)
 
-This is a document calls called *ijsra*  which is used for the __[International Journal of Student Research in Archaeology](http://www.ijsra.org) (IJSRA)__. 
+This is a document class called *ijsra*  which is used for the __[International Journal of Student Research in Archaeology](http://www.ijsra.org) (IJSRA)__. 
 
 ---
 

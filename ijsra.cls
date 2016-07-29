@@ -20,8 +20,8 @@
 \RequirePackage{ifxetex,ifluatex,ifpdf,ifvtex}
 \RequirePackage{xkeyval}
 
-\def\IJSRAversion{0.1}
-\def\IJSRAversiondate{2016/07/27}
+\def\IJSRAversion{0.1a}
+\def\IJSRAversiondate{2016/07/28}
 
 
 
