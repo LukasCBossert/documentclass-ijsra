@@ -20,8 +20,8 @@
 \RequirePackage{ifxetex,ifluatex,ifpdf,ifvtex}
 \RequirePackage{xkeyval}
 
-\def\IJSRAversion{0.1a}
-\def\IJSRAversiondate{2016/07/28}
+\def\IJSRAversion{0.2}
+\def\IJSRAversiondate{2016/08/08}
 
 
 
@@ -86,13 +86,12 @@
 detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	exponent-to-prefix  		= true,
 	round-mode          		= places, 
-	round-precision     		= 1,
-	group-minimum-digits 	= 4, 		% Für "Tausenderpunkt" --> 1.234 anstatt 1234
+	group-minimum-digits 	= 4, 
 	group-separator		={,},		% für "12.345" statt "12 345"
 	range-phrase 			= {~$\times$\ },%
 	zero-decimal-to-integer 	= true,	%aus "2.0" wird "2"
 	range-units			=single, 	% --> 2 x 2 m, - auskommentieren für 2 m x 2 m
-	]{siunitx} %Supreme typesetting of units
+	]{siunitx} 
 \RequirePackage[					% advanced quotes
 	strict=true,					% 	- warning are errors now
 	style=english,					% 	- german quotes
@@ -230,14 +229,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 {\savebox\mybox{#1}\begin{quote}}
 	{\signed{\usebox\mybox}\end{quote}}
 
-\makeatletter %%%Schriftgröße in quote kleiner
-\newif\if@in@footnote@
-\renewcommand{\@footnotetext}[1]{%
-	\scr@saved@footnotetext{\@in@footnote@true #1}%
-	\csname FN@mf@prepare\endcsname
-}
-\AtBeginEnvironment{quote}{\if@in@footnote@\else\small\fi}
-\makeatother
+\appto\quote{\normalsize\singlespacing}
 %-----------------------------------------
 \newcommand\ppages{\pagerange{firstpage\IJSRAidentifier}{lastpage\IJSRAidentifier}}
 \newcommand\shorttitle{}
@@ -251,18 +243,14 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \newenvironment{IJSRAabstract}
 {\list{}{\rightmargin\leftmargin}%
-\item \normalsize\sffamily\textbf\keywordname :  \keywords\\
-	\footnotesize\itshape
+\item \footnotesize\sffamily\textbf\keywordname :  \keywords\\
+	\itshape
 	\noindent\item\relax
 	}
 {\endlist}
 
-\newcommand{\IJSRAseparator}{
-	\vspace{2em}
-	\begin{center}
-		* * *
-	\end{center}
-	\vspace{2em}}
+\newcommand{\IJSRAseparator}{\vspace{1em}\begin{center}
+* * *\end{center}\vspace{1em}}
 
 \newcommand{\IJSRAchapter}[1]{
 	\setcounter{chapter}{1}
@@ -300,6 +288,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	}
 	
 \providecommand\IJSRAclosing{%
+	\IJSRAseparator
 	\printbibliography[heading=subbibliography] 
 	\end{refsection}
 	\label{lastpage\IJSRAidentifier}

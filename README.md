@@ -1,7 +1,7 @@
 document class __ijsra__    
 ======= 
 
-_2016/07/28 v0.1a_
+_2016/08/08 v0.2_
 
 Copyright (c) 2016 Lukas C. Bossert 
 

@@ -3,6 +3,7 @@
 %	month=October,
 %	number=1,
 %	volume=2,
+french,
 	]{ijsra}
 \def\IJSRAidentifier{\currfilebase}
 
@@ -13,7 +14,7 @@
 \def\authormail{lukas@digitales-altertum.de}
 \def\affiliation{Humboldt-Universität zu Berlin | Excellence-Cluster Topoi}
 \def\thanknote{The coding of this documentclass is done at \href{https://github.com/LukasCBossert/documentclass-ijsra}{https://github.com/LukasCBossert/documentclass-ijsra} }
-%\def\keywordname{hello}
+%\def\keywordname{}
 \def\keywords{documentclass, \LaTeX , IJSRA}
 %--------------------------------------------------------------
 
@@ -96,6 +97,7 @@ And it changes of course if we start the article with a ›W‹.
 \lettrine[slope=-4pt,nindent=-4pt,lines=3]{W}{hen} ...
 \end{lstlisting}
 
+\IJSRAseparator
 Each article contains several information about the author, title, etc. 
 This is done with some definitions. 
 You have to fill in the information in the curly brackets.
@@ -110,7 +112,7 @@ You have to fill in the information in the curly brackets.
 \def\keywords{} %<---- keywords describing the article
 %\def\keywordname{} %<---- name of keywords in an other language
 \end{lstlisting}
-
+\IJSRAseparator
 After the definitions there is the block regarding the bibliographical entries.
 Those are written in the section 
 \begin{lstlisting}[label=bibliography,caption={Bibliographical information}]
@@ -170,7 +172,7 @@ Here we define the layout of the headline.
 \IJSRAmid %<---- don’t change or forget this
 \end{lstlisting}
 If there is no \texttt{thanknote} you only have to comment line no. 4 and there will be no footnote.
-
+\IJSRAseparator
 After that we come to the abstract. 
 The abstract is set in the enviroment \texttt{IJSRAabstract}:
 \begin{lstlisting}[label=abstract,caption={IJSRAabstract}]
@@ -178,7 +180,7 @@ The abstract is set in the enviroment \texttt{IJSRAabstract}:
 Abstract
 \end{IJSRAabstract}
 \end{lstlisting}
-
+\IJSRAseparator
 Then you can copy/paste the text of the article and make further editing.
 At the very end you have to insert 
 \begin{lstlisting}[label=closing,caption={IJSRAclosing}]
@@ -226,38 +228,121 @@ Abstract
 Let’s have a look how to do certain editing.
 
 How to do quotes:\marginnote{quotes}
-For that we use the enviroment |IJSRAquote| and 
-\begin{IJSRAquote}{author of the quote}
-paste the quote here
-\end{IJSRAquote}
+Quotes are inserted between the enviroment |IJSRAquote|.
+Let me give you an example:
+
 \begin{lstlisting}[label=quote,caption={Quote}]
-\begin{IJSRAquote}{author of the quote}
-paste the quote here
+\begin{IJSRAquote}{Johann Joachim Winckelmann}
+Grace can never properly be said to exist without beauty; 
+for it is only in the elegant proportions of beautiful forms 
+that can be found that harmonious variety of line and motion 
+which is the essence and charm of grace.
 \end{IJSRAquote}
 \end{lstlisting}
+It will be displayed as this:
+ 
+\begin{IJSRAquote}{Johann Joachim Winckelmann}
+Grace can never properly be said to exist without beauty; 
+for it is only in the elegant proportions of beautiful forms 
+that can be found that harmonious variety of line and motion 
+which is the essence and charm of grace.
+\end{IJSRAquote}
+Of course you can also use |\cite[page]{bibtex-key}| for the author of the quote.
 
-For other things e.g. figures or citing, please have a look at other documentations or
+\IJSRAseparator
+You can\marginnote{separator} insert a separation mark between some paragraphs,
+as it is inserted automatically just before the bibliography. 
+For that we edited a special form a separation mark. 
+You can use it with |\IJSRAseparator|.
 
+\IJSRAseparator
+When suitable \marginnote{caption}we try to insert figures as a |wrapefigure| into the text.
+Otherwise we insert them into the |figure|-enviroment.
+
+If you have a table which is saved as a figure, 
+you have to make a change to the caption. 
+I show you how to do that. 
+\begin{lstlisting}[label=caption,caption={Modify the caption}]
+\captionof{table}{Put the caption here.}
+\end{lstlisting}
+
+\IJSRAseparator
+Modifying\marginnote{references}  e.g. the caption is important for referencing in the text.
+We use the special macro |\cref{label}| to reference to a figure, a table or anything else.
+It makes it easier because we can omit to write ›fig.‹ or ›table‹ before the number of the figure or the table. 
+The correct form (›fig.‹ etc.)  will be inserted automatically by \LaTeX .
+If you like to have the first letter capitalised you can use |\Cref| instead.
+
+Furthermore you can insert several |label| into a |\cref| by |\cref{label1,label2,label3}|.
+
+\IJSRAseparator
+If you\marginnote{numbers \& units} have a number or a number with an unit, 
+please use the macros which are provided my |\SI|.
+Let me show you some examples.
+\begin{labeling}{range phrase (1)}
+\item[meter] |100 m| has to be written as |\SI{100}{\meter}|;
+\item[percent] |75 %| has to be written as |\SI{75}{\percent}|;
+\item[range phrase (1)] |10x10 m|  has to be written as |\SIrange{10}{10}{\meter}|;
+\item[range phrase (2)] |10--15 cm|  has to be written as |\SIrange[range-phrase=--]{10}{15}{\centi\meter}|;
+\item[number] |23.394| has to be written as |\num{23394}|;
+\item[angle] |56°| has to be written as |\ang{56}|;
+\item[round precision] If you want to make a round precision of your numbers you can set it yourself by |\SI[round-precision=2]{23.3390}{\meter}| which will make |23.34 m|.
+\end{labeling}
+
+
+
+\IJSRAseparator
+We have\marginnote{Different abstracts} the abstract of the article in english in the beginning,
+just as shown in the template in \cref{document,abstract}.
+If there is another abstract in a different language we put that at the end of the article.
+For that we need also to redefine the keywords and usually the name \emph{keywords} according to the language of the abstract.
+
+I give you an example how to edit a second abstract.
+\begin{lstlisting}[label=abstract2,caption={Different abstract}]
+\def\keywordname{Mots clés}
+\def\keywords{keywords in French, \LaTeX , IJSRA, journal}
+\foreignlanguage{french}{%
+\begin{IJSRAabstract}
+Abstract\marginnote{Abstract (French)} in French: Copy and paste the abstract in the different language here!
+\end{IJSRAabstract}
+}
+\end{lstlisting}
+\def\keywordname{Mots clés}
+\def\keywords{keywords in French, \LaTeX , IJSRA, journal}
+\foreignlanguage{french}{%
+\begin{IJSRAabstract}
+Abstract\marginnote{Abstract (French)} in French: Copy and paste the abstract in the different language here!
+\end{IJSRAabstract}
+}
+
+Do not forget to add the language in the options of the documentclass
+\begin{lstlisting}[label=abstract2,caption={Add the language of the abstract into the preamble}]
+\documentclass[
+	french,%<--- add the language if not English
+	]{ijsra}
+\end{lstlisting}
+
+
+
+\IJSRAseparator
 Some general information:
 \begin{itemize}
 \item Be aware of different brackets, e.g. |[] {}|;
 These are part of \LaTeX -programming-language, every opening bracket needs a closing one.
 \item Replace e.g. |19 %| with |\SI{19}{\percent}| otherwise everything after |%| will be omitted by \LaTeX;
-\item Replace |&| with |\&|; same with other units, e.g. meter: |100 m| has to be written as |\SI{100}{\meter}|;
+\item Replace |&| with |\&|; 
 \item Replace the citation of authors (e.g |Blesser \& Salter 2006|) with |\cite{Blesser2006}|;
 	 if you have a page-range write: 	|\cite[23--45]{Blesser2006}|;
 \item To compile with bibliography-references;
 use 1 $\times$ Xe\LaTeX, then 1 $\times$ compiler ›biber‹, then 1 $\times$ Xe\LaTeX.
-\end{itemize}
-
-If you want to know how to cite properly
+\item If you want to know how to cite properly
 please have a look at the documentation of \texttt{biblatex-ijsra}.\footnote{\cite[see][]{Bossert-ijsra};\\ \url{http://mirrors.ctan.org//macros/latex/contrib/biblatex-contrib/biblatex-ijsra/biblatex-ijsra.pdf}}
-
+\end{itemize}
 \nocite{*}
-\printbibliography
+\IJSRAclosing
+
 \clearpage
 You find the code using to write this documentation below.
 
 \lstinputlisting[language={[AlLaTeX]{TeX}}]{\jobname.tex}
-\IJSRAclosing
 \end{document}
