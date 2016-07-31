@@ -3,7 +3,6 @@
 %	month=October,
 %	number=1,
 %	volume=2,
-french,
 	]{ijsra}
 \def\IJSRAidentifier{\currfilebase}
 
@@ -225,8 +224,28 @@ Abstract
 \end{document}
 \end{lstlisting}
 \clearpage
-Let’s have a look how to do certain editing.
+Before we have a closer look how to do certain editing
+let me give you some advice about naming the |tex|-file and the related figures.
+The |tex|-file has to be saved under an unique and individual name.
+Usually this is the family name of the author: e.g. |winckelmann.tex|
+If you think this is not enough because the author has quite a common family (as it might be with \emph{Johnson}) 
+plese use a word from the title, e.g. |Johnson_prehistory.tex|.
+Notice there must not be a blank in the name, use instead |_| or |-|.
 
+The name of the |tex|-file is what we have defined as the |\IJSRAidentifier|, 
+with that we can differentiate between all the texts from the authors.
+
+We need this |IJSRAidentifier| again for the figures:
+put the figures in a folder called |figures|.
+Do not name the figures e.g. |figure1|, |figure2| etc. but use again this 
+|IJSRAidentifier| (e.g. |Johnson_prehistory|) and name the figures like this:
+|Johnson_prehistory_fig01.jpg| or |winckelmann_fig01.png|.
+You can also name tables in the same way:
+|Johnson_prehistory_tab01.jpg| or |winckelmann_tab01.png|.
+
+\alertinfo{But please make sure that the \emph{IJSRAidentifier} is used with correct spelling of the author’s name etc.}
+
+\IJSRAseparator
 How to do quotes:\marginnote{quotes}
 Quotes are inserted between the enviroment |IJSRAquote|.
 Let me give you an example:
@@ -315,12 +334,12 @@ Abstract\marginnote{Abstract (French)} in French: Copy and paste the abstract in
 \end{IJSRAabstract}
 }
 
-Do not forget to add the language in the options of the documentclass
-\begin{lstlisting}[label=abstract2,caption={Add the language of the abstract into the preamble}]
-\documentclass[
-	french,%<--- add the language if not English
-	]{ijsra}
-\end{lstlisting}
+%Do not forget to add the language in the options of the documentclass
+%\begin{lstlisting}[label=abstract2,caption={Add the language of the abstract into the preamble}]
+%\documentclass[
+%	french,%<--- add the language if not English
+%	]{ijsra}
+%\end{lstlisting}
 
 
 

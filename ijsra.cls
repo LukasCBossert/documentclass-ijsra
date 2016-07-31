@@ -49,7 +49,7 @@
 	twoside=true,				% onesite or twoside printing
 	open=right,					% doublepage cleaning ends up right side
 	chapterprefix=false,		% prefix for chapter marks (Löscht "Kapitel" bei Kapitel)
-	headings=optiontohead, 		% \chapter[tocentry={}]{}
+	headings=optiontohead, 	% \chapter[tocentry={}]{}
 	fontsize=11pt,				% font size
 	titlepage=on,				% own page for each title page
 	captions=tableabove,		% display table captions above the float env
@@ -60,7 +60,7 @@
 \RequirePackage{filecontents}
 \RequirePackage{libertine}
 \renewcommand*\ttdefault{lmvtt}
-\RequirePackage[main=english]{babel}
+\RequirePackage[french, ngerman, spanish, main=english]{babel}
 
 \ifxetex\else
 	\RequirePackage[%
