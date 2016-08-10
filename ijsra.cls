@@ -60,7 +60,7 @@
 \RequirePackage{filecontents}
 \RequirePackage{libertine}
 \renewcommand*\ttdefault{lmvtt}
-\RequirePackage[french, ngerman, spanish, main=english]{babel}
+\RequirePackage[french, ngerman, spanish, italian, main=english]{babel}
 
 \ifxetex\else
 	\RequirePackage[%
@@ -110,7 +110,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \RequirePackage{multirow}
 \RequirePackage{xspace}
 \RequirePackage{xcolor}
-
+\RequirePackage{hologo}
 \definecolor{myblue}{rgb}{0,0,51}
 \definecolor{mygold}{RGB}{204,153,51}
 
@@ -249,14 +249,19 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	}
 {\endlist}
 
-\newcommand{\IJSRAseparator}{\vspace{1em}\begin{center}
-* * *\end{center}\vspace{1em}}
+\newcommand{\IJSRAseparator}{%
+	\vspace{1em}
+	\begin{center}
+	* * *
+	\end{center}
+	\vspace{1em}
+	}
 
-\newcommand{\IJSRAchapter}[1]{
+\newcommand{\IJSRAchapter}[1]{%
 	\setcounter{chapter}{1}
 	\chapter*{#1}
 	\addcontentsline{toc}{chapter}{\shortauthor\protect\newline \maintitle}
-}
+	}
 	
 \newcommand\email{{\normalfont\href{mailto:\authormail}{\authormail}}}
 
@@ -265,7 +270,8 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	\edef\tempa{\getpagerefnumber{#1}\booltrue{@page}}%
 	\edef\tempb{\getpagerefnumber{#2}}%
 	\ifboolexpr{bool{@page}}{}{\ $\bullet$ 
-		\tempa--\tempb}}
+		\tempa--\tempb}
+	}
 
 
 \providecommand\IJSRAopening{%
@@ -292,7 +298,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	\printbibliography[heading=subbibliography] 
 	\end{refsection}
 	\label{lastpage\IJSRAidentifier}
-}
+	}
 
  \DeclareCaptionFormat{listing}{#1#2#3}
  \captionsetup[lstlisting]{format=listing,%
@@ -355,7 +361,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	colorlinks   = true, %Colours links instead of ugly boxes
 	urlcolor     =  myblue, %Colour for external hyperlinks
 	linkcolor    = myblue, %Colour of internal links
-	citecolor   = myblue, %Colour of citations
+	citecolor   = mygold, %Colour of citations
 	linktoc=page,
 	pdfborder={0 0 0},			% 	-
 	breaklinks=true,			% 	- allow line break inside links
