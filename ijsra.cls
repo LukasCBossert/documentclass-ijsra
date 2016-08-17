@@ -21,7 +21,7 @@
 \RequirePackage{xkeyval}
 
 \def\IJSRAversion{0.2}
-\def\IJSRAversiondate{2016/08/08}
+\def\IJSRAversiondate{2016/08/18}
 
 
 
