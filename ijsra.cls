@@ -29,6 +29,7 @@
 \newcommand*\IJSRAyear{\scshape proof}% \edef\issueyear{\the\year}
 \newcommand*\IJSRAvolume{\scshape proof}
 \newcommand*\IJSRAnumber{\scshape proof}
+\newcommand*\IJSRAtitlefigure{\color{mygold}\rule{1000pt}{400pt}}
 \newcommand*\IJSRAidentifier{\jobname}
 
 
@@ -38,6 +39,7 @@
 \DeclareOptionX{year}{\def\IJSRAyear{#1}}
 \DeclareOptionX{volume}{\def\IJSRAvolume{Vol.\addspace #1}}
 \DeclareOptionX{number}{\def\IJSRAnumber{No.\addspace #1}}
+\DeclareOptionX{titlefigure}{\def\IJSRAtitlefigure{#1}}
 \DeclareOptionX*{\OptionNotUsed}
 \ProcessOptionsX\relax
 
@@ -61,16 +63,16 @@
 \RequirePackage{libertine}
 \renewcommand*\ttdefault{lmvtt}
 \RequirePackage[french, ngerman, spanish, italian, main=english]{babel}
+\ifxetex\else
 \RequirePackage[%
-	,protrusion=true
-	,expansion=true
-	,verbose=true
-	,final=true
-	,letterspace=100
-	,babel=true
-	stretch=10,%(default is 20/20)
-	shrink=10
-	]{microtype}
+,protrusion=true
+,expansion=true
+,verbose=true
+,final=true
+,letterspace=100
+,babel=true
+]{microtype}
+\fi
 \RequirePackage{colortbl}
 \RequirePackage{abbrevs}
 \RequirePackage{alertmessage}
@@ -112,6 +114,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \RequirePackage{hologo}
 \definecolor{myblue}{rgb}{0,0,51}
 \definecolor{mygold}{RGB}{204,153,51}
+\definecolor{mybluetitle}{RGB}{28,40,65} % HEX 1c2841
 
 \definecolor{codeblue}{RGB}{0,65,137}
 \definecolor{codegreen}{RGB}{147,193,26}
@@ -298,6 +301,44 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	\end{refsection}
 	\label{lastpage\IJSRAidentifier}
 	}
+
+\def\Put(#1,#2)#3{\makebox(0,0){\put(#1,#2){#3}}}
+
+\def\IJSRAtitlepage{%
+\definecolor{mybluetitle}{RGB}{28,40,65} % HEX 1c2841
+\newgeometry{%
+	head=0cm,			% 	- no header
+	foot =0cm,
+	bindingoffset=0cm,			% 	- binding correction
+	top=0cm,						% 	- total body: top margin
+	left=0cm,						% 	- total body: left margin (odd pages)
+	right=0cm,					% 	- total body: right margin (odd pages)
+	bottom=0cm,					% 	- total body: bottom margin
+	marginparwidth=0cm,			% 	- width for side note
+}
+\thispagestyle{empty}
+\pagecolor{mybluetitle}
+\Put(-11,-450){\includegraphics[width=\linewidth]{\IJSRAtitlefigure}}\\
+\Put(-11,-450){\color{white}\rule{1.5\linewidth}{15pt}}
+\Put(.5\linewidth-3.5cm,-1.1\linewidth){\includegraphics[width=7cm]{ijsra_logo.png}}\\
+
+\vspace{.6\linewidth}
+\begin{center}\color{white}
+\fontsize{40}{40}\selectfont
+International Journal of \\ 
+Student Research in \\ 
+Archaeology
+
+\vfill
+\fontsize{15}{15}\selectfont
+\IJSRAnumber\ \IJSRAvolume\\
+\IJSRAmonth\ \IJSRAyear
+
+\vspace{2em}
+{ijsra.org}
+\end{center}
+\clearpage\restoregeometry\pagecolor{white}}
+
 
  \DeclareCaptionFormat{listing}{#1#2#3}
  \captionsetup[lstlisting]{format=listing,%
