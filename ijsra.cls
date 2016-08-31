@@ -20,8 +20,8 @@
 \RequirePackage{ifxetex,ifluatex,ifpdf,ifvtex}
 \RequirePackage{xkeyval}
 
-\def\IJSRAversion{0.2}
-\def\IJSRAversiondate{2016/08/18}
+\def\IJSRAversion{0.3}
+\def\IJSRAversiondate{2016/09/01}
 
 
 
@@ -29,7 +29,7 @@
 \newcommand*\IJSRAyear{\scshape proof}% \edef\issueyear{\the\year}
 \newcommand*\IJSRAvolume{\scshape proof}
 \newcommand*\IJSRAnumber{\scshape proof}
-\newcommand*\IJSRAtitlefigure{\color{mygold}\rule{1000pt}{400pt}}
+\newcommand*\IJSRAtitlefigure{\color{mygold}\rule{\linewidth}{410pt}}
 \newcommand*\IJSRAidentifier{\jobname}
 
 
@@ -39,7 +39,7 @@
 \DeclareOptionX{year}{\def\IJSRAyear{#1}}
 \DeclareOptionX{volume}{\def\IJSRAvolume{Vol.\addspace #1}}
 \DeclareOptionX{number}{\def\IJSRAnumber{No.\addspace #1}}
-\DeclareOptionX{titlefigure}{\def\IJSRAtitlefigure{#1}}
+\DeclareOptionX{titlefigure}{\def\IJSRAtitlefigure{\includegraphics[width=\linewidth]{figures/#1}}}
 \DeclareOptionX*{\OptionNotUsed}
 \ProcessOptionsX\relax
 
@@ -318,7 +318,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 }
 \thispagestyle{empty}
 \pagecolor{mybluetitle}
-\Put(-11,-450){\includegraphics[width=\linewidth]{\IJSRAtitlefigure}}\\
+\Put(-11,-450){\IJSRAtitlefigure}\\
 \Put(-11,-450){\color{white}\rule{1.5\linewidth}{15pt}}
 \Put(.5\linewidth-3.5cm,-1.1\linewidth){\includegraphics[width=7cm]{ijsra_logo.png}}\\
 

@@ -1,7 +1,7 @@
 document class __ijsra__    
 ======= 
 
-_2016/08/18 v0.2_
+_2016/09/01 v0.3_
 
 Copyright (c) 2016 Lukas C. Bossert 
 
@@ -24,7 +24,7 @@ and its style:
 
 and the required logo:
 
-* ijsra_logo.jpg
+* ijsra_logo.png
 
 
 This work may be distributed and/or modified under the
