@@ -63,16 +63,16 @@
 \RequirePackage{libertine}
 \renewcommand*\ttdefault{lmvtt}
 \RequirePackage[french, ngerman, spanish, italian, main=english]{babel}
-\ifxetex\else
+%\ifxetex\else
 \RequirePackage[%
-,protrusion=true
-,expansion=true
+%,protrusion=true
+%,expansion=true
 ,verbose=true
 ,final=true
 ,letterspace=100
 ,babel=true
 ]{microtype}
-\fi
+%\fi
 \RequirePackage{colortbl}
 \RequirePackage{abbrevs}
 \RequirePackage{alertmessage}
