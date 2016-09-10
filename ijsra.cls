@@ -89,13 +89,13 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	round-mode          		= places, 
 	group-minimum-digits 	= 4, 
 	group-separator		={,},		% für "12.345" statt "12 345"
-	range-phrase 			= {~$\times$\ },%
+	range-phrase 			= {$\times$},%
 	zero-decimal-to-integer 	= true,	%aus "2.0" wird "2"
 	range-units			=single, 	% --> 2 x 2 m, - auskommentieren für 2 m x 2 m
 	]{siunitx} 
 \RequirePackage[					% advanced quotes
-	strict=true,					% 	- warning are errors now
-	style=english,					% 	- german quotes
+	strict=true,					
+	style=english,					
 ]{csquotes}
 \RequirePackage[					%% use  for bibliography
 	backend=biber,
@@ -137,17 +137,22 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 ]{geometry}
 \RequirePackage{multicol} % Used for the two-column layout of the document
 \RequirePackage[%
-	hang, 
+	%hang, 
 	small,
 	labelfont=bf,
 	up,
+	singlelinecheck=off,
+	justification=raggedright,
 	textfont=it,
 	up,
 	]{caption} % Custom captions under/above floats in tables or figures
 \RequirePackage{subcaption}
 \RequirePackage{setspace}			% for line spacing, e.g. \onehalfspacing
 \RequirePackage{booktabs} % Horizontal rules in tables
-\RequirePackage{float} % Required for tables and figures in the multi-column environment - they need to be placed in specific locations with the [H] (e.g. \begin{table}[H])
+\RequirePackage[%
+footskip=0pt,
+footposition=caption,
+      ]{floatrow}
 \RequirePackage{nth}
 
 \RequirePackage{caption}
@@ -217,8 +222,8 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
   \fi
 }{}
 
-\renewcommand{\marginfont}{%
-	\normalfont\small\sffamily}
+\renewcommand{\marginfont}{\noindent\rule{0pt}{0.7\baselineskip}\color{mygold}\small\sffamily}
+\RequirePackage{marginfix}
 %-------------------------------------------
 %---Zitate/Quote
 \def\signed #1{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
@@ -240,8 +245,14 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \newcommand\authormail{}
 \newcommand\affiliation{}
 \newcommand\thanknote{}
+\newcommand\source[1]{\floatfoot{#1}} %figures
 \def\keywords{}
 \def\keywordname{Keywords}
+
+\newcommand{\ijsrasection}[1]{%
+	\marginnote{#1}\pdfbookmark[1]{#1}{#1}%
+}
+
 
 \newenvironment{IJSRAabstract}
 {\list{}{\rightmargin\leftmargin}%

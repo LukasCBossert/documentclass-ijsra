@@ -78,7 +78,7 @@ This is a documentation of the class \texttt{ijsra} which is used for the
 
 %\IJSRAseparator
 
-\lettrine[nindent=0em,lines=3]{E}{very}  article\marginnote{starting} starts with a lettrine as the first letter.
+\lettrine[nindent=0em,lines=3]{E}{very}  article\ijsrasection{starting} starts with a lettrine as the first letter.
 This bigger letter functions as an eye catcher to make clear where the article starts.
 It effects the whole word: The first letter reaches down to the third line, the other letters of the word are capitalised. 
 In \cref{lettrine} you see the code how this is achieved.
@@ -246,7 +246,19 @@ You can also name tables in the same way:
 \alertinfo{But please make sure that the \emph{IJSRAidentifier} is used with correct spelling of the author’s name etc.}
 
 \IJSRAseparator
-How to do quotes:\marginnote{quotes}
+As \ijsrasection{sections}a subdivison of the paper into section we use the code |\ijsrasection{<<section name>>}|.
+
+Be aware to insert the code \emph{after} the first word of the paragraph under the section heading. 
+
+\begin{lstlisting}[label=section,caption={Section}]
+This\ijsrasection{New Paragraph} is a new paragraph under the section with the title ›New Paragraph‹.
+\end{lstlisting}
+\alertwarning{This code may conflict with wrapfigures since the section title and the wrapfigure use the margin space. 
+In that case you have to move the wrapfigure further up or further down.}
+
+
+\IJSRAseparator
+How to do quotes:\ijsrasection{quotes}
 Quotes are inserted between the enviroment |IJSRAquote|.
 Let me give you an example:
 
@@ -269,13 +281,39 @@ which is the essence and charm of grace.
 Of course you can also use |\cite[page]{bibtex-key}| for the author of the quote.
 
 \IJSRAseparator
-You can\marginnote{separator} insert a separation mark between some paragraphs,
+You can\ijsrasection{separator} insert a separation mark between some paragraphs,
 as it is inserted automatically just before the bibliography. 
 For that we edited a special form a separation mark. 
 You can use it with |\IJSRAseparator|.
-
 \IJSRAseparator
-When suitable \marginnote{caption}we try to insert figures as a |wrapefigure| into the text.
+There  \ijsrasection{figures}are two ways to insert a figure into the text.
+\begin{enumerate}
+\item by using the plain enviroment |figure|
+
+\begin{lstlisting}[label=figure,caption={figure}]
+\begin{figure}
+\includegraphics[width=\linewidth]{figures/NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
+\caption{<<Description of the figure>>}
+\label{fig:NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
+\source{<<NAME_OF_THE_SOURCE>>}
+\end{figure}
+\end{lstlisting}
+
+\item by using the enhanced enviroment |wrapfigure| 
+
+\begin{lstlisting}[label=wrapfigure,caption={wrapfigure}]
+\begin{wrapfigure}{O}{0.5\textwidth} 
+\centering
+\includegraphics[width=\linewidth]{figures/NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
+\caption{<<Description of the figure>>}
+\label{fig:NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
+\source{<<NAME_OF_THE_SOURCE>>}
+\end{wrapfigure} 
+\end{lstlisting}
+
+\end{enumerate}
+\IJSRAseparator
+When suitable \ijsrasection{caption}we try to insert figures as a |wrapefigure| into the text.
 Otherwise we insert them into the |figure|-enviroment.
 
 If you have a table which is saved as a figure, 
@@ -286,7 +324,7 @@ I show you how to do that.
 \end{lstlisting}
 
 \IJSRAseparator
-Modifying\marginnote{references}  e.g. the caption is important for referencing in the text.
+Modifying\ijsrasection{references}  e.g. the caption is important for referencing in the text.
 We use the special macro |\cref{label}| to reference to a figure, a table or anything else.
 It makes it easier because we can omit to write ›fig.‹ or ›table‹ before the number of the figure or the table. 
 The correct form (›fig.‹ etc.)  will be inserted automatically by \LaTeX .
@@ -295,7 +333,7 @@ If you like to have the first letter capitalised you can use |\Cref| instead.
 Furthermore you can insert several |label| into a |\cref| by |\cref{label1,label2,label3}|.
 
 \IJSRAseparator
-If you\marginnote{numbers \& units} have a number or a number with an unit, 
+If you\ijsrasection{numbers \& units} have a number or a number with an unit, 
 please use the macros which are provided my |\SI|.
 Let me show you some examples.
 \begin{labeling}{range phrase (1)}
@@ -311,7 +349,7 @@ Let me show you some examples.
 
 
 \IJSRAseparator
-We have\marginnote{Different abstracts} the abstract of the article in english in the beginning,
+We have\ijsrasection{Different abstracts} the abstract of the article in english in the beginning,
 just as shown in the template in \cref{document,abstract}.
 If there is another abstract in a different language we put that at the end of the article.
 For that we need also to redefine the keywords and usually the name \emph{keywords} according to the language of the abstract.
@@ -322,7 +360,7 @@ I give you an example how to edit a second abstract.
 \def\keywords{keywords in French, \LaTeX , IJSRA, journal}
 \foreignlanguage{french}{%
 \begin{IJSRAabstract}
-Abstract\marginnote{Abstract (French)} in French: Copy and paste the abstract in the different language here!
+Abstract\ijsrasection{Abstract (French)} in French: Copy and paste the abstract in the different language here!
 \end{IJSRAabstract}
 }
 \end{lstlisting}
@@ -330,7 +368,7 @@ Abstract\marginnote{Abstract (French)} in French: Copy and paste the abstract in
 \def\keywords{keywords in French, \LaTeX , IJSRA, journal}
 \foreignlanguage{french}{%
 \begin{IJSRAabstract}
-Abstract\marginnote{Abstract (French)} in French: Copy and paste the abstract in the different language here!
+Abstract\ijsrasection{Abstract (French)} in French: Copy and paste the abstract in the different language here!
 \end{IJSRAabstract}
 }
 
@@ -372,5 +410,5 @@ please have a look at the documentation of \texttt{biblatex-ijsra}.\footnote{\ci
 \clearpage
 You find the code using to write this documentation below.
 
-\lstinputlisting[language={[AlLaTeX]{TeX}}]{\jobname.tex}
+%\lstinputlisting[language={[AlLaTeX]{TeX}}]{\jobname.tex}
 \end{document}
