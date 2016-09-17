@@ -78,6 +78,10 @@
 \RequirePackage{alertmessage}
 \RequirePackage{marginnote}
 \RequirePackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+\LettrineTextFont{\itshape}
+\setcounter{DefaultLines}{3}
+\renewcommand{\LettrineTextFont}{\normalfont}%für zweite Klammer
+\renewcommand{\LettrineFontHook}{\normalfont}
 \RequirePackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
 \RequirePackage{currfile}
 \RequirePackage{currfile-abspath}
@@ -155,7 +159,7 @@ footposition=caption,
       ]{floatrow}
 \RequirePackage{nth}
 
-\RequirePackage{caption}
+
 \RequirePackage{chngcntr} %Voraussetzung fuer Fussnoten durch alle Kapitel durchnummerieren
 \RequirePackage{listings}
 \AtBeginDocument{\counterwithin{lstlisting}{chapter}}
@@ -249,10 +253,70 @@ footposition=caption,
 \def\keywords{}
 \def\keywordname{Keywords}
 
-\newcommand{\ijsrasection}[1]{%
+\newcommand{\IJSRAsection}[1]{%
 	\marginnote{#1}\pdfbookmark[1]{#1}{#1}%
 }
 
+\newcommand\authorone{}
+\newcommand\authortwo{}
+\newcommand\authorthree{}
+\newcommand\authorfour{}
+\newcommand\authorfive{}
+
+\newcommand\affilone{}
+\newcommand\affiltwo{}
+\newcommand\affilthree{}
+\newcommand\affilfour{}
+\newcommand\affilfive{}
+
+\newcommand\affiloneauthor{}
+\newcommand\affiltwoauthor{}
+\newcommand\affilthreeauthor{}
+\newcommand\affilfourauthor{}
+\newcommand\affilfiveauthor{}
+
+\newcommand\bioone{}
+\newcommand\biotwo{}
+\newcommand\biothree{}
+\newcommand\biofour{}
+\newcommand\biofive{}
+
+\newcommand\abstract{}
+
+\undef\authorone{}
+\undef\authortwo{}
+\undef\authorthree{}
+\undef\authorfour{}
+\undef\authorfive{}
+
+\undef\affilone{}
+\undef\affiltwo{}
+\undef\affilthree{}
+\undef\affilfour{}
+\undef\affilfive{}
+
+\undef\affiloneauthor{}
+\undef\affiltwoauthor{}
+\undef\affilthreeauthor{}
+\undef\affilfourauthor{}
+\undef\affilfiveauthor{}
+
+\undef\bioone{}
+\undef\biotwo{}
+\undef\biothree{}
+\undef\biofour{}
+\undef\biofive{}
+
+\def\shortauthor{\authorone%
+	\ifdef{\authortwo}{, \authortwo}{}%
+	\ifdef{\authorthree}{, \authorthree}{}%
+	\ifdef{\authorfour}{, \authorfour}{}%
+	\ifdef{\authorfive}{, \authorfive}{}}
+	
+	
+	
+	
+	
 
 \newenvironment{IJSRAabstract}
 {\list{}{\rightmargin\leftmargin}%
@@ -295,22 +359,62 @@ footposition=caption,
 	\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 	\IJSRAchapter{\maintitle}
 	\begin{center}
-	}
 	
-\providecommand\IJSRAmid{%
-	\end{center}
+	{\Large\scshape%
+	\authorone\ifdef{\bioone}{{\footnote[1]{\bioone}}}{}%
+	\ifdef{\authortwo}{, \authortwo\ifdef{\biotwo}{{\footnote[2]{\biotwo}}}{}}{}%
+	\ifdef{\authorthree}{, \authorthree\ifdef{\biothree}{{\footnote[3]{\biothree}}}{}}{}%
+	\ifdef{\authorfour}{, \authorfour\ifdef{\biofour}{{\footnote[4]{\biofour}}}{}}{}%
+	\ifdef{\authorfive}{, \authorfive\ifdef{\biofive}{{\footnote[5]{\biofive}}}{}}{}%
+    }%
+	\\[1em]
+	\email
+	\ifdef{\affilone}{\\ \textsuperscript{\ifdef{\affiloneauthor}{$\affiloneauthor$}{$*$}}\affilone}{}%
+	\ifdef{\affiltwo}{\\ \ifdef{\affiltwoauthor}{\textsuperscript{$\affiltwoauthor$}}{}\affiltwo}{}%
+	\ifdef{\affilthree}{\\ \ifdef{\affilthreeauthor}{\textsuperscript{$\affilthreeauthor$}}{}\affilthree}{}%	
+	\ifdef{\affilfour}{\\ \ifdef{\affilfourauthor}{\textsuperscript{$\affilfourauthor$}}{}\affilfour}{}%
+	\ifdef{\affilfive}{\\ \ifdef{\affilfiveauthor}{\textsuperscript{$\affilfiveauthor$}}{}\affilfive}{}%
+\end{center}
 	\vspace{3em}
 	\pagestyle{scrheadings}	
 	\setcounter{footnote}{0}
 	\renewcommand*{\thefootnote}{\arabic{footnote}}
 	\label{firstpage\IJSRAidentifier}
-	}
+
+\begin{IJSRAabstract}
+\abstract
+\end{IJSRAabstract}
+}
+
 	
 \providecommand\IJSRAclosing{%
 	\IJSRAseparator
 	\printbibliography[heading=subbibliography] 
 	\end{refsection}
 	\label{lastpage\IJSRAidentifier}
+\undef\authorone{}
+\undef\authortwo{}
+\undef\authorthree{}
+\undef\authorfour{}
+\undef\authorfive{}
+
+\undef\affilone{}
+\undef\affiltwo{}
+\undef\affilthree{}
+\undef\affilfour{}
+\undef\affilfive{}
+
+\undef\affiloneauthor{}
+\undef\affiltwoauthor{}
+\undef\affilthreeauthor{}
+\undef\affilfourauthor{}
+\undef\affilfiveauthor{}
+
+\undef\bioone{}
+\undef\biotwo{}
+\undef\biothree{}
+\undef\biofour{}
+\undef\biofive{}
 	}
 
 \def\Put(#1,#2)#3{\makebox(0,0){\put(#1,#2){#3}}}
