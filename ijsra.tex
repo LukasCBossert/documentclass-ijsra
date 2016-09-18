@@ -5,14 +5,21 @@
 %	volume=2,
 	]{ijsra}
 \def\IJSRAidentifier{\currfilebase}
-
-
+%--------Author’s names------------
+\def\authorone{Lukas C. Bossert}
+%-------Biographical information-------------
+\def\bioone{The coding of this documentclass is done at \href{https://github.com/LukasCBossert/documentclass-ijsra}{https://github.com/LukasCBossert/documentclass-ijsra} }
+%-------Title-------------
 \def\shorttitle{The \texttt{ijsra}-class, Version \IJSRAversion\ -- \IJSRAversiondate}
-\def\maintitle{The \texttt{ijsra}-class, Version \IJSRAversion\ -- \IJSRAversiondate}
-\def\shortauthor{Lukas C. Bossert}
-\def\authormail{lukas@digitales-altertum.de}
-\def\affiliation{Humboldt-Universität zu Berlin | Excellence-Cluster Topoi}
-\def\thanknote{The coding of this documentclass is done at \href{https://github.com/LukasCBossert/documentclass-ijsra}{https://github.com/LukasCBossert/documentclass-ijsra} }
+\def\maintitle{\shorttitle}
+\def\abstract{This is a documentation of the class \texttt{ijsra} which is used for the
+ \emph{International Journal of Student Research in Archaeology}.
+ Read this documentation carefully.
+ When you start editing do it according to the structure shown in \cref{document}.}
+%------University/Institution--------------
+\def\affilone{Humboldt-Universität zu Berlin | Excellence-Cluster Topoi}
+%--------Email------------
+\def\cmail{lukas@digitales-altertum.de}
 %\def\keywordname{}
 \def\keywords{documentclass, \LaTeX , IJSRA}
 %--------------------------------------------------------------
@@ -60,62 +67,86 @@
 \lstMakeShortInline[style=code]|
 \IJSRAopening
 
-	{\Large\scshape
-	\shortauthor}%
-	\footnote\thanknote%
-	\\[1em]
-	\email\\
-	\affiliation
-
-\IJSRAmid
-
-\begin{IJSRAabstract}%
-This is a documentation of the class \texttt{ijsra} which is used for the
- \emph{International Journal of Student Research in Archaeology}.
- Read this documentation carefully.
- When you start editing do it according to the structure shown in \cref{document}.
-\end{IJSRAabstract}
 
 %\IJSRAseparator
 
-\lettrine[nindent=0em,lines=3]{E}{very}  article\ijsrasection{starting} starts with a lettrine as the first letter.
+\lettrine{E}{very}  article\IJSRAsection{starting} starts with a lettrine as the first letter.
 This bigger letter functions as an eye catcher to make clear where the article starts.
 It effects the whole word: The first letter reaches down to the third line, the other letters of the word are capitalised. 
 In \cref{lettrine} you see the code how this is achieved.
 
  \begin{lstlisting}[label=lettrine,caption={Starting letter}]
-\lettrine[nindent=0em,lines=3]{E}{very} article ... 
+\lettrine{E}{very} article ... 
 \end{lstlisting}
 If you have a letter which is rather slanted you can define the slope. 
 Let’s have a look at the letter ›A‹.
  \begin{lstlisting}[label=lettrine,caption={Starting letter ›A‹}]
-\lettrine[slope=4pt,findent=-3pt,lines=3]{A}{rchaeologists}  …
+\lettrine[slope=4pt,findent=-3pt]{A}{rchaeologists}  …
 \end{lstlisting}
 And it changes of course if we start the article with a ›W‹. 
  \begin{lstlisting}[label=lettrine,caption={Starting letter ›W‹}]
-\lettrine[slope=-4pt,nindent=-4pt,lines=3]{W}{hen} ...
+\lettrine[slope=-4pt,nindent=-4pt]{W}{hen} ...
 \end{lstlisting}
 
 \IJSRAseparator
-Each article contains several information about the author, title, etc. 
-This is done with some definitions. 
-You have to fill in the information in the curly brackets.
+The |tex|-file \IJSRAsection{document class}of each article starts with the definition of the  document class.
+Herefor we use the destinctive class |ijsra| and load it with this line:
+\begin{lstlisting}[label=documentclass,caption={First line of tex-file.}]
+\documentclass[<options>]{ijsra}
+\end{lstlisting}
+For  |<options>| you can use e.g. |draft|: this will omitt the figures and gives you a white frame with the size of the figures instead. 
+The advantage is faster compiling.
+
+\IJSRAseparator
+Each article contains several information about the author(s), title etc. 
+The document class can cope easily with one to five authors and their affiliation. 
+Above that manual work is needed.
+The information about author, title, affiliation, biography etc are written into curly brackets.
 \begin{lstlisting}[label=information,caption={Information about the article}]
-\def\IJSRAidentifier{\currfilebase} %<---- don’t change this!
-\def\shorttitle{} %<---- this is for the short title
-\def\maintitle{} %<---- full title
-\def\shortauthor{} %<---- full name of the author
-\def\authormail{} %<--- email address name@email.com
-\def\affiliation{} %<--- university or institution
-\def\thanknote{} %<--- further information regarding the author
-\def\keywords{} %<---- keywords describing the article
-%\def\keywordname{} %<---- name of keywords in an other language
+\def\IJSRAidentifier{\currfilebase} %<---- do not change this!
+%-------Title | Email | Keywords | Abstract-------------
+\def\shorttitle{Jons short title}
+\def\maintitle{Jons very long title about his paper}
+\def\cmail{John@Doe.com}%<---- corresponding email-address
+\def\keywords{Research, Archaeology, ...}
+%\def\keywordname{}%<--- redefine the name ›Keywords‹ in needed language
+\def\abstract{In his paper Jon is showing ...}
+%--------Author  names------------
+\def\authorone{Jon Doe}
+%\def\authortwo{}%<---- comment/delete if there is no second author.
+%\def\authorthree{}%<---- comment/delete if there is no third author.
+%\def\authorfour{}%<---- comment/delete if there is no fourth author.
+%\def\authorfive{}%<---- comment/delete if there is no fifth author.
+%-------Biographical information-------------
+\def\bioone{Jon Doe is doing his research about ...}
+%\def\biotwo{}%<---- comment/delete if there is no second author.
+%\def\biothree{}%<---- comment/delete if there is no third author.
+%\def\biofour{}%<---- comment/delete if there is no fourth author.
+%\def\biofive{}%<---- comment/delete if there is no fifth author.
+%------University/Institution--------------
+\def\affilone{Jon Doe’s university or institution}
+%\def\affiltwo{}%<---- comment/delete if there is no second author.
+%\def\affilthree{}<---- comment/delete if there is no third author.
+%\def\affilfour{}<---- comment/delete if there is no fourth author.
+%\def\affilfive{}<---- comment/delete if there is no fifth author.
+%--------Mapping of authors to their affiliations------------
+%% authorone:--> * <--- copy/paste that symbol
+%% authortwo:--> † <--- copy/paste that symbol
+%% authorthree:--> ‡ <--- copy/paste that symbol
+%% authorfour: --> § <--- copy/paste that symbol
+%% authorfive: --> ¶ <--- copy/paste that symbol
+%-----------------------------------------------------------------
+%\def\affiloneauthor{}%<---- paste the symbol of the authors into {}
+%\def\affiltwoauthor{}%<---- paste the symbol of the authors into {}
+%\def\affilthreeauthor{}%<---- paste the symbol of the authors into {}
+%\def\affilfourauthor{}%<---- paste the symbol of the authors into {}
+%\def\affilfiveauthor{}%<---- paste the symbol of the authors into {}
 \end{lstlisting}
 \IJSRAseparator
 After the definitions there is the block regarding the bibliographical entries.
 Those are written in the section 
 \begin{lstlisting}[label=bibliography,caption={Bibliographical information}]
-\begin{filecontents}{\IJSRAidentifier.bib} %<--- don’t change this
+\begin{filecontents}{\IJSRAidentifier.bib} %<--- do not change this
 
 @Incollection{Orengo2015,
   author       = {Orengo, H.},
@@ -161,24 +192,9 @@ After that we have completed the preamble and get to main part of the document.
 Here we define the layout of the headline.
 
 \begin{lstlisting}[label=headline,caption={Headline layout}]
-\IJSRAopening %<---- don’t change or forget this
-	{\Large\scshape
-	\shortauthor}%
-	\footnote\thanknote% 
-	\\[1em]
-	\email\\
-	\affiliation
-\IJSRAmid %<---- don’t change or forget this
+\IJSRAopening %<---- do not change or forget this
 \end{lstlisting}
-If there is no \texttt{thanknote} you only have to comment line no. 4 and there will be no footnote.
-\IJSRAseparator
-After that we come to the abstract. 
-The abstract is set in the enviroment \texttt{IJSRAabstract}:
-\begin{lstlisting}[label=abstract,caption={IJSRAabstract}]
-\begin{IJSRAabstract}
-Abstract
-\end{IJSRAabstract}
-\end{lstlisting}
+
 \IJSRAseparator
 Then you can copy/paste the text of the article and make further editing.
 At the very end you have to insert 
@@ -187,43 +203,34 @@ At the very end you have to insert
 \end{lstlisting}
 
 \clearpage
-Following there is a minimal template how the plain document should look like when you begin to edit.
+Following there is a minimal template how the plain document should look like when you begin to edit and there is only one author.
 \begin{lstlisting}[label=document,caption={Plain document}]
 \documentclass{ijsra}
-\def\IJSRAidentifier{\currfilebase}
-\def\shorttitle{}
-\def\maintitle{}
-\def\shortauthor{}
-\def\authormail{}
-\def\affiliation{}
-\def\thanknote{}
-\def\keywords{}
+\def\IJSRAidentifier{\currfilebase} %<---- do not change this!
+\def\shorttitle{Jons short title}
+\def\maintitle{Jons very long title about his paper}
+\def\cmail{John@Doe.com}
+\def\keywords{Research, Archaeology, ...}
 %\def\keywordname{}
+\def\abstract{In his paper Jon is showing ...}
+\def\authorone{Jon Doe}
+\def\bioone{Jon Doe is doing his research about ...}
+\def\affilone{Jon Doe’s university or institution}
 \begin{filecontents}{\IJSRAidentifier.bib}
 Bibliography-files
 \end{filecontents}
 
 \begin{document}
 \IJSRAopening
-	{\Large\scshape
-	\shortauthor}%
-	\footnote\thanknote%
-	\\[1em]
-	\email\\
-	\affiliation
-\IJSRAmid
 
-\begin{IJSRAabstract}
-Abstract
-\end{IJSRAabstract}
-
-\lettrine[nindent=0em,lines=3]{M}{ain} text ... 
-
+\lettrine{M}{ain} text ... 
 
 \IJSRAclosing
 \end{document}
 \end{lstlisting}
-\clearpage
+Since we only have one author there is no need to specify the connection of |\authorone| to |\affilone| since this is done automatically.
+As soon as you have more than one author you need to do the mapping by copying the symbols ( *  †  ‡  §  ¶ ) into the right |\affiloneauthor| or |\affiltwoauthor|.
+
 Before we have a closer look how to do certain editing
 let me give you some advice about naming the |tex|-file and the related figures.
 The |tex|-file has to be saved under an unique and individual name.
@@ -246,19 +253,19 @@ You can also name tables in the same way:
 \alertinfo{But please make sure that the \emph{IJSRAidentifier} is used with correct spelling of the author’s name etc.}
 
 \IJSRAseparator
-As \ijsrasection{sections}a subdivison of the paper into section we use the code |\ijsrasection{<<section name>>}|.
+As \IJSRAsection{sections}a subdivison of the paper into section we use the code |\IJSRAsection{<<section name>>}|.
 
 Be aware to insert the code \emph{after} the first word of the paragraph under the section heading. 
 
 \begin{lstlisting}[label=section,caption={Section}]
-This\ijsrasection{New Paragraph} is a new paragraph under the section with the title ›New Paragraph‹.
+This\IJSRAsection{New Paragraph} is a new paragraph under the section with the title ›New Paragraph‹.
 \end{lstlisting}
 \alertwarning{This code may conflict with wrapfigures since the section title and the wrapfigure use the margin space. 
 In that case you have to move the wrapfigure further up or further down.}
 
 
 \IJSRAseparator
-How to do quotes:\ijsrasection{quotes}
+How to do quotes:\IJSRAsection{quotes}
 Quotes are inserted between the enviroment |IJSRAquote|.
 Let me give you an example:
 
@@ -281,21 +288,21 @@ which is the essence and charm of grace.
 Of course you can also use |\cite[page]{bibtex-key}| for the author of the quote.
 
 \IJSRAseparator
-You can\ijsrasection{separator} insert a separation mark between some paragraphs,
+You can\IJSRAsection{separator} insert a separation mark between some paragraphs,
 as it is inserted automatically just before the bibliography. 
 For that we edited a special form a separation mark. 
 You can use it with |\IJSRAseparator|.
 \IJSRAseparator
-There  \ijsrasection{figures}are two ways to insert a figure into the text.
+There  \IJSRAsection{figures}are two ways to insert a figure into the text.
 \begin{enumerate}
 \item by using the plain enviroment |figure|
 
 \begin{lstlisting}[label=figure,caption={figure}]
 \begin{figure}
-\includegraphics[width=\linewidth]{figures/NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
-\caption{<<Description of the figure>>}
+\includegraphics[width=\linewidth]{NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
+\caption{<<Description of the figure>> 
+        {\normalfont \\ \copyright\ by NAME OF COPYRIGHT HOLDER}}
 \label{fig:NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
-\source{<<NAME_OF_THE_SOURCE>>}
 \end{figure}
 \end{lstlisting}
 
@@ -304,16 +311,16 @@ There  \ijsrasection{figures}are two ways to insert a figure into the text.
 \begin{lstlisting}[label=wrapfigure,caption={wrapfigure}]
 \begin{wrapfigure}{O}{0.5\textwidth} 
 \centering
-\includegraphics[width=\linewidth]{figures/NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
-\caption{<<Description of the figure>>}
+\includegraphics[width=\linewidth]{NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
+\caption{<<Description of the figure>> 
+        {\normalfont \\ \copyright\ by NAME OF COPYRIGHT HOLDER}}
 \label{fig:NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
-\source{<<NAME_OF_THE_SOURCE>>}
 \end{wrapfigure} 
 \end{lstlisting}
-
 \end{enumerate}
+Since you (hopefully) place the figures into the folder named |figures| there is no need to tell the path, the figure name is sufficient. 
 \IJSRAseparator
-When suitable \ijsrasection{caption}we try to insert figures as a |wrapefigure| into the text.
+When suitable \IJSRAsection{caption}we try to insert figures as a |wrapefigure| into the text.
 Otherwise we insert them into the |figure|-enviroment.
 
 If you have a table which is saved as a figure, 
@@ -324,7 +331,7 @@ I show you how to do that.
 \end{lstlisting}
 
 \IJSRAseparator
-Modifying\ijsrasection{references}  e.g. the caption is important for referencing in the text.
+Modifying\IJSRAsection{references}  e.g. the caption is important for referencing in the text.
 We use the special macro |\cref{label}| to reference to a figure, a table or anything else.
 It makes it easier because we can omit to write ›fig.‹ or ›table‹ before the number of the figure or the table. 
 The correct form (›fig.‹ etc.)  will be inserted automatically by \LaTeX .
@@ -333,7 +340,7 @@ If you like to have the first letter capitalised you can use |\Cref| instead.
 Furthermore you can insert several |label| into a |\cref| by |\cref{label1,label2,label3}|.
 
 \IJSRAseparator
-If you\ijsrasection{numbers \& units} have a number or a number with an unit, 
+If you\IJSRAsection{numbers \& units} have a number or a number with an unit, 
 please use the macros which are provided my |\SI|.
 Let me show you some examples.
 \begin{labeling}{range phrase (1)}
@@ -349,7 +356,7 @@ Let me show you some examples.
 
 
 \IJSRAseparator
-We have\ijsrasection{Different abstracts} the abstract of the article in english in the beginning,
+We have\IJSRAsection{Different abstracts} the abstract of the article in english in the beginning,
 just as shown in the template in \cref{document,abstract}.
 If there is another abstract in a different language we put that at the end of the article.
 For that we need also to redefine the keywords and usually the name \emph{keywords} according to the language of the abstract.
@@ -360,7 +367,7 @@ I give you an example how to edit a second abstract.
 \def\keywords{keywords in French, \LaTeX , IJSRA, journal}
 \foreignlanguage{french}{%
 \begin{IJSRAabstract}
-Abstract\ijsrasection{Abstract (French)} in French: Copy and paste the abstract in the different language here!
+Abstract\IJSRAsection{Abstract (French)} in French: Copy and paste the abstract in the different language here!
 \end{IJSRAabstract}
 }
 \end{lstlisting}
@@ -368,7 +375,7 @@ Abstract\ijsrasection{Abstract (French)} in French: Copy and paste the abstract 
 \def\keywords{keywords in French, \LaTeX , IJSRA, journal}
 \foreignlanguage{french}{%
 \begin{IJSRAabstract}
-Abstract\ijsrasection{Abstract (French)} in French: Copy and paste the abstract in the different language here!
+Abstract\IJSRAsection{Abstract (French)} in French: Copy and paste the abstract in the different language here!
 \end{IJSRAabstract}
 }
 
@@ -388,7 +395,7 @@ Global options: These options can be used and set to the current number:
 |number|.
 
 Furthermore you can set the document to |draft| or give the name of the title figure with |titlefigure|.
-The title figure has to be within the folder |figures| and be in a ratio of \SIrange{1000}{400}{pt}.
+The title figure has to be within the folder |figures| and be in an aspect ratio of \SIrange{1000}{400}{pt}.
 
 \IJSRAseparator
 Some general information:
@@ -405,10 +412,12 @@ use 1 $\times$ \hologo{XeLaTeX}, then 1 $\times$ compiler ›biber‹, then 1 $\
 please have a look at the documentation of \texttt{biblatex-ijsra}.\footnote{\cite[see][]{Bossert-ijsra};\\ \url{http://mirrors.ctan.org//macros/latex/contrib/biblatex-contrib/biblatex-ijsra/biblatex-ijsra.pdf}}
 \end{itemize}
 \nocite{*}
+
 \IJSRAclosing
 
 \clearpage
 You find the code using to write this documentation below.
+
 
 %\lstinputlisting[language={[AlLaTeX]{TeX}}]{\jobname.tex}
 \end{document}

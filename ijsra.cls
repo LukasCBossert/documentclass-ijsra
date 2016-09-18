@@ -20,8 +20,8 @@
 \RequirePackage{ifxetex,ifluatex,ifpdf,ifvtex}
 \RequirePackage{xkeyval}
 
-\def\IJSRAversion{0.3}
-\def\IJSRAversiondate{2016/09/01}
+\def\IJSRAversion{0.4}
+\def\IJSRAversiondate{2016/09/18}
 
 
 
@@ -110,6 +110,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \RequirePackage{etoolbox}
 \RequirePackage{graphicx}
+\graphicspath{{figures/}}
 \RequirePackage{wrapfig} % Paket zur Positionierung einbinden
 \RequirePackage{booktabs}%für schönere Tabellen
 \RequirePackage{multirow}
@@ -153,10 +154,6 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \RequirePackage{subcaption}
 \RequirePackage{setspace}			% for line spacing, e.g. \onehalfspacing
 \RequirePackage{booktabs} % Horizontal rules in tables
-\RequirePackage[%
-footskip=0pt,
-footposition=caption,
-      ]{floatrow}
 \RequirePackage{nth}
 
 
@@ -246,10 +243,18 @@ footposition=caption,
 \newcommand\shorttitle{}
 \newcommand\maintitle{}
 \newcommand\shortauthor{}
-\newcommand\authormail{}
+\newcommand\cmail{}
 \newcommand\affiliation{}
 \newcommand\thanknote{}
-\newcommand\source[1]{\floatfoot{#1}} %figures
+
+\patchcmd{\Gin@setfile}{\ttfamily\expandafter\strip@prefix\meaning\@tempa}{\@missingcopyright}{}{}
+\def\@missingcopyright{%
+	\footnotesize\sffamily
+		Figure omitted due to faster compiling.
+		% comment the following line if you don't want to show the file name
+%\expandafter\strip@prefix\meaning\@tempa 
+	}
+
 \def\keywords{}
 \def\keywordname{Keywords}
 
@@ -307,11 +312,13 @@ footposition=caption,
 \undef\biofour{}
 \undef\biofive{}
 
-\def\shortauthor{\authorone%
+\def\shortauthor{%
+	\ifdef{\authorone}{\authorone}{}%
 	\ifdef{\authortwo}{, \authortwo}{}%
 	\ifdef{\authorthree}{, \authorthree}{}%
 	\ifdef{\authorfour}{, \authorfour}{}%
-	\ifdef{\authorfive}{, \authorfive}{}}
+	\ifdef{\authorfive}{, \authorfive}{}
+}
 	
 	
 	
@@ -340,7 +347,7 @@ footposition=caption,
 	\addcontentsline{toc}{chapter}{\shortauthor\protect\newline \maintitle}
 	}
 	
-\newcommand\email{{\normalfont\href{mailto:\authormail}{\authormail}}}
+\newcommand\email{{\normalfont\href{mailto:\cmail}{\cmail}}}
 
 \newbool{@page}
 \newcommand{\pagerange}[2]{%pp.~
