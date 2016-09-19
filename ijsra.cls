@@ -255,7 +255,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 %\expandafter\strip@prefix\meaning\@tempa 
 	}
 
-\def\keywords{}
+%\def\keywords{}
 \def\keywordname{Keywords}
 
 \newcommand{\IJSRAsection}[1]{%
@@ -328,7 +328,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \newenvironment{IJSRAabstract}
 {\list{}{\rightmargin\leftmargin}%
-\item \footnotesize\sffamily\textbf\keywordname :  \keywords\\
+\item \footnotesize\sffamily \ifdef\keywords{\textbf{\keywordname :}  \keywords}{}
 	\itshape
 	\noindent\item\relax
 	}
@@ -366,8 +366,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	\setcounter{figure}{0}
 	\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 	\IJSRAchapter{\maintitle}
-	\begin{center}
-	
+	\begin{center}	
 	{\Large\scshape%
 	\authorone\ifdef{\bioone}{{\footnote[1]{\bioone}}}{}%
 	\ifdef{\authortwo}{, \authortwo\ifdef{\biotwo}{{\footnote[2]{\biotwo}}}{}}{}%
@@ -383,11 +382,12 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	\ifdef{\affilfour}{\\ \ifdef{\affilfourauthor}{\textsuperscript{$\affilfourauthor$}}{}\affilfour}{}%
 	\ifdef{\affilfive}{\\ \ifdef{\affilfiveauthor}{\textsuperscript{$\affilfiveauthor$}}{}\affilfive}{}%
 \end{center}
-	\vspace{3em}
+	\vspace*{2em}
 	\pagestyle{scrheadings}	
 	\setcounter{footnote}{0}
 	\renewcommand*{\thefootnote}{\arabic{footnote}}
 	\label{firstpage\IJSRAidentifier}
+
 
 \ifdef\abstract{%
 \begin{IJSRAabstract}
@@ -421,7 +421,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \undef\affilfiveauthor{}
 
 \undef\abstract{}
-
+\undef\keywords{}
 \undef\bioone{}
 \undef\biotwo{}
 \undef\biothree{}
