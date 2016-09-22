@@ -20,8 +20,8 @@
 \RequirePackage{ifxetex,ifluatex,ifpdf,ifvtex}
 \RequirePackage{xkeyval}
 
-\def\IJSRAversion{0.4}
-\def\IJSRAversiondate{2016/09/18}
+\def\IJSRAversion{0.5}
+\def\IJSRAversiondate{2016/09/XX}
 
 
 
@@ -214,7 +214,8 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \deffootnote{0em}{1em}{{\sffamily\textbf\thefootnotemark}\ }%Ausgabe der Fußnotenziffer in normal
 %--------------------------------------
-\robustify{\DateMark} % after having loaded abbrevs
+
+
 
 
 \ifstr{\KOMAScriptVersion}{2015/07/02 v3.18 KOMA-Script}{%
@@ -244,8 +245,9 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \newcommand\maintitle{}
 \newcommand\shortauthor{}
 \newcommand\cmail{}
-\newcommand\affiliation{}
-\newcommand\thanknote{}
+
+\renewcommand\AD{{\,AD\xspace}}
+\renewcommand\BC{\,BC\xspace}}
 
 \patchcmd{\Gin@setfile}{\ttfamily\expandafter\strip@prefix\meaning\@tempa}{\@missingcopyright}{}{}
 \def\@missingcopyright{%
@@ -255,7 +257,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 %\expandafter\strip@prefix\meaning\@tempa 
 	}
 
-%\def\keywords{}
+\undef\keywords{}
 \def\keywordname{Keywords}
 
 \newcommand{\IJSRAsection}[1]{%
@@ -287,6 +289,8 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \newcommand\biofive{}
 
 \newcommand\abstract{}
+
+
 \undef\abstract{}
 
 \undef\authorone{}
