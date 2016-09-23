@@ -60,7 +60,7 @@
 
 
 \RequirePackage{filecontents}
-\RequirePackage{libertine}
+\RequirePackage[oldstyle]{libertine}
 \renewcommand*\ttdefault{lmvtt}
 \RequirePackage[french, ngerman, spanish, italian, main=english]{babel}
 %\ifxetex\else
@@ -154,7 +154,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \RequirePackage{subcaption}
 \RequirePackage{setspace}			% for line spacing, e.g. \onehalfspacing
 \RequirePackage{booktabs} % Horizontal rules in tables
-\RequirePackage{nth}
+\RequirePackage[super]{nth}
 
 
 \RequirePackage{chngcntr} %Voraussetzung fuer Fussnoten durch alle Kapitel durchnummerieren
@@ -247,7 +247,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \newcommand\cmail{}
 
 \renewcommand\AD{{\,AD\xspace}}
-\renewcommand\BC{\,BC\xspace}}
+\renewcommand\BC{{\,BC\xspace}}
 
 \patchcmd{\Gin@setfile}{\ttfamily\expandafter\strip@prefix\meaning\@tempa}{\@missingcopyright}{}{}
 \def\@missingcopyright{%
