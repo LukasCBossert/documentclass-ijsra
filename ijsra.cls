@@ -18,10 +18,10 @@
 
 \ProvidesClass{ijsra}
 \RequirePackage{ifxetex,ifluatex,ifpdf,ifvtex}
-\RequirePackage{xkeyval}
+\RequirePackage{xkeyval,etoolbox}
 
 \def\IJSRAversion{0.5}
-\def\IJSRAversiondate{2016/09/XX}
+\def\IJSRAversiondate{2017/01/06}
 
 
 
@@ -31,12 +31,14 @@
 \newcommand*\IJSRAnumber{\scshape proof}
 \newcommand*\IJSRAtitlefigure{\color{mygold}\rule{\linewidth}{410pt}}
 \newcommand*\IJSRAidentifier{\jobname}
+\newbool{bib:nobib}
 
 
 
 \DeclareOptionX{draft}{\PassOptionsToClass{\CurrentOption}{scrbook}}
 \DeclareOptionX{month}{\def\IJSRAmonth{#1}}
 \DeclareOptionX{year}{\def\IJSRAyear{#1}}
+\DeclareOptionX{nobib}{\csuse{booltrue}{bib:nobib}}
 \DeclareOptionX{volume}{\def\IJSRAvolume{Vol.\addspace #1}}
 \DeclareOptionX{number}{\def\IJSRAnumber{No.\addspace #1}}
 \DeclareOptionX{titlefigure}{\def\IJSRAtitlefigure{\includegraphics[width=\linewidth]{figures/#1}}}
@@ -51,17 +53,35 @@
 	twoside=true,				% onesite or twoside printing
 	open=right,					% doublepage cleaning ends up right side
 	chapterprefix=false,		% prefix for chapter marks (Löscht "Kapitel" bei Kapitel)
-	headings=optiontohead, 	% \chapter[tocentry={}]{}
+%	headings=openany,
+%    headings=optiontohead, 	% \chapter[tocentry={}]{}
 	fontsize=11pt,				% font size
 	titlepage=on,				% own page for each title page
 	captions=tableabove,		% display table captions above the float env
 	numbers=noenddot,
 ]{scrbook}%	
 
+\renewcommand\partpagestyle{empty}
 
 \RequirePackage{filecontents}
+\RequirePackage{amsmath}
 \RequirePackage[oldstyle]{libertine}
-\renewcommand*\ttdefault{lmvtt}
+\RequirePackage[T1,small,euler-digits]{eulervm}
+\defaultfontfeatures[AnonymousPro]
+  {
+    Extension      = .ttf                       ,
+    BoldFont       = AnonymousPro-Bold          ,
+    ItalicFont     = AnonymousPro-BoldItalic    ,
+    BoldItalicFont = AnonymousPro-Italic        ,
+    UprightFont    = AnonymousPro-Regular       ,
+  }
+\setmonofont[Scale= MatchLowercase]{AnonymousPro}
+
+%\RequirePackage{enumitem}
+
+
+\RequirePackage{url}
+\urlstyle{same}
 \RequirePackage[french, ngerman, spanish, italian, main=english]{babel}
 %\ifxetex\else
 \RequirePackage[%
@@ -105,10 +125,9 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	backend=biber,
 	style=ijsra,
 	]{biblatex}
-\addbibresource{\jobname.bib}
+\ifbool{bib:nobib}{}{\addbibresource{\jobname.bib}}
 
 
-\RequirePackage{etoolbox}
 \RequirePackage{graphicx}
 \graphicspath{{figures/}}
 \RequirePackage{wrapfig} % Paket zur Positionierung einbinden
@@ -151,7 +170,16 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	textfont=it,
 	up,
 	]{caption} % Custom captions under/above floats in tables or figures
-\RequirePackage{subcaption}
+\RequirePackage[
+    list=true,
+    listformat=default,
+]{subcaption}
+\captionsetup[subfigure]{%
+    %	listformat=subabb,
+    subrefformat=simple,
+    font={footnotesize,sf}, 
+    labelformat=simple,% default (a) |	empty	| simple	a | brace	 a) |parens (a)
+}
 \RequirePackage{setspace}			% for line spacing, e.g. \onehalfspacing
 \RequirePackage{booktabs} % Horizontal rules in tables
 \RequirePackage[super]{nth}
@@ -179,7 +207,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \rohead[{{\vspace{-3em}\includegraphics[width=2cm]{ijsra_logo}}}]{\normalfont\textbf{\sffamily\thepage}}
 \lehead{\normalfont\textbf{\sffamily\thepage}}
 \refoot{\normalfont\sffamily\footnotesize International Journal of Student Research in Archaeology}
-\lofoot{\normalfont\sffamily\footnotesize \IJSRAmonth\ \IJSRAyear\ $\bullet$ \IJSRAvolume, No. \IJSRAnumber}
+\lofoot{\normalfont\sffamily\footnotesize \IJSRAmonth\ \IJSRAyear\ $\bullet$ \IJSRAvolume,  \IJSRAnumber}
 \automark[subsection]{section}  
 
 %-----------------------------
@@ -252,7 +280,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \patchcmd{\Gin@setfile}{\ttfamily\expandafter\strip@prefix\meaning\@tempa}{\@missingcopyright}{}{}
 \def\@missingcopyright{%
 	\footnotesize\sffamily
-		Figure omitted due to faster compiling.
+		Figure omitted due to missing copyright.
 		% comment the following line if you don't want to show the file name
 %\expandafter\strip@prefix\meaning\@tempa 
 	}
@@ -261,7 +289,10 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \def\keywordname{Keywords}
 
 \newcommand{\IJSRAsection}[1]{%
-	\marginnote{#1}\pdfbookmark[1]{#1}{#1}%
+	\marginnote{#1}\pdfbookmark[1]{#1}{#1	\IJSRAidentifier	}%
+}
+\newcommand{\IJSRAsubsection}[1]{%
+	\marginnote{#1}\pdfbookmark[2]{#1}{#1\IJSRAidentifier}%
 }
 
 \newcommand\authorone{}
@@ -349,7 +380,8 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \newcommand{\IJSRAchapter}[1]{%
 	\setcounter{chapter}{1}
 	\chapter*{#1}
-	\addcontentsline{toc}{chapter}{\shortauthor\protect\newline \maintitle}
+	\addcontentsline{toc}{chapter}{\shortauthor\protect\newline \maintitle}%
+	\pdfbookmark[0]{\shortauthor\ |\ \maintitle}{#1}
 	}
 	
 \newcommand\email{{\normalfont\href{mailto:\cmail}{\cmail}}}
@@ -365,6 +397,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \providecommand\IJSRAopening{%
 	\begin{refsection}
+	\bookmarksetup{depth=-1}
 	\setcounter{footnote}{0}
 	\setcounter{table}{0}
 	\setcounter{figure}{0}
@@ -432,6 +465,37 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \undef\biofour{}
 \undef\biofive{}
 	}
+\providecommand\IJSRAclosingclean{%
+    \printbibliography[heading=subbibliography] 
+\end{refsection}
+\label{lastpage\IJSRAidentifier}
+\undef\authorone{}
+\undef\authortwo{}
+\undef\authorthree{}
+\undef\authorfour{}
+\undef\authorfive{}
+
+\undef\affilone{}
+\undef\affiltwo{}
+\undef\affilthree{}
+\undef\affilfour{}
+\undef\affilfive{}
+
+\undef\affiloneauthor{}
+\undef\affiltwoauthor{}
+\undef\affilthreeauthor{}
+\undef\affilfourauthor{}
+\undef\affilfiveauthor{}
+
+\undef\abstract{}
+\undef\keywords{}
+\undef\bioone{}
+\undef\biotwo{}
+\undef\biothree{}
+\undef\biofour{}
+\undef\biofive{}
+}
+
 
 \def\Put(#1,#2)#3{\makebox(0,0){\put(#1,#2){#3}}}
 
@@ -448,12 +512,13 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	marginparwidth=0cm,			% 	- width for side note
 }
 \thispagestyle{empty}
+	\pdfbookmark[0]{Cover}{Cover}
 \pagecolor{mybluetitle}
 \Put(-11,-450){\IJSRAtitlefigure}\\
 \Put(-11,-450){\color{white}\rule{1.5\linewidth}{15pt}}
 \Put(.5\linewidth-3.5cm,-1.1\linewidth){\includegraphics[width=7cm]{ijsra_logo.png}}\\
 
-\vspace{.6\linewidth}
+\vspace*{15cm}
 \begin{center}\color{white}
 \fontsize{40}{40}\selectfont
 International Journal of \\ 
@@ -462,7 +527,7 @@ Archaeology
 
 \vfill
 \fontsize{15}{15}\selectfont
-\IJSRAnumber\ \IJSRAvolume\\
+\IJSRAvolume\ | \IJSRAnumber\\
 \IJSRAmonth\ \IJSRAyear
 
 \vspace{2em}
@@ -537,12 +602,14 @@ Archaeology
 	pdfborder={0 0 0},			% 	-
 	breaklinks=true,			% 	- allow line break inside links
 	bookmarksnumbered=true,		%
-	bookmarksopenlevel=2,
+	bookmarksopenlevel=0,
 	bookmarksopen=true,		%
 	final=true	% = true, only with web-Documents!!
 }
+\RequirePackage{bookmark}
 
 \RequirePackage{cleveref}
 
-
-\endinput
+%\AtBeginDocument\IJSRAopening
+%\AtEndDocument\IJSRAclosing
+%\endinput

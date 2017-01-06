@@ -28,3 +28,9 @@ beispiel.tex
 *.gz(busy)
 
 ijsra.bib
+
+*.fdb_latexmk
+
+*.lb
+
+*.fls

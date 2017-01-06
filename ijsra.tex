@@ -10,8 +10,8 @@
 %-------Biographical information-------------
 \def\bioone{The coding of this documentclass is done at \href{https://github.com/LukasCBossert/documentclass-ijsra}{https://github.com/LukasCBossert/documentclass-ijsra} }
 %-------Title-------------
-\def\shorttitle{The \texttt{ijsra}-class, Version \IJSRAversion\ -- \IJSRAversiondate}
-\def\maintitle{\shorttitle}
+\def\maintitle{The \texttt{ijsra}-class, Version \IJSRAversion\ -- \IJSRAversiondate}
+\def\shorttitle{\maintitle}
 \def\abstract{This is a documentation of the class \texttt{ijsra} which is used for the
  \emph{International Journal of Student Research in Archaeology}.
  Read this documentation carefully.
@@ -260,6 +260,8 @@ Be aware to insert the code \emph{after} the first word of the paragraph under t
 \begin{lstlisting}[label=section,caption={Section}]
 This\IJSRAsection{New Paragraph} is a new paragraph under the section with the title ›New Paragraph‹.
 \end{lstlisting}
+There is also the possibility to do a \IJSRAsubsection{subsections}  |\IJSRAsubsection{<<subsection name>>}|. It will be displayed as a |\IJSRAsection{<<section name>>}| but in the pdf-bookmarks there is a differentiation.
+
 \alertwarning{This code may conflict with wrapfigures since the section title and the wrapfigure use the margin space. 
 In that case you have to move the wrapfigure further up or further down.}
 
