@@ -2,7 +2,7 @@
 %%
 %% LaTeX Class for ``International Journal of Student Research in Archaeology''.
 %%
-%% Copyright (C) 2016-
+%% Copyright (C) 2016,2017-
 %% Lukas C. Bossert
 %%
 %% It may be distributed and/or modified under the
@@ -20,27 +20,32 @@
 \RequirePackage{ifxetex,ifluatex,ifpdf,ifvtex}
 \RequirePackage{xkeyval,etoolbox}
 
-\def\IJSRAversion{0.5}
-\def\IJSRAversiondate{2017/01/06}
+\def\IJSRAversion{1.0}
+\def\IJSRAversiondate{2017/06/09}
+
+\newbool{issue}
+\newbool{nobib}
+
+\boolfalse{nobib}
+\boolfalse{issue}
 
 
 
-\newcommand*\IJSRAmonth{\scshape proof}
-\newcommand*\IJSRAyear{\scshape proof}% \edef\issueyear{\the\year}
-\newcommand*\IJSRAvolume{\scshape proof}
-\newcommand*\IJSRAnumber{\scshape proof}
-\newcommand*\IJSRAtitlefigure{\color{mygold}\rule{\linewidth}{410pt}}
+\newcommand*\IJSRAmonth{{\scshape proof}}
+\newcommand*\IJSRAyear{{\scshape proof}}% \edef\issueyear{\the\year}
+\newcommand*\IJSRAvolume{{\scshape proof}}
+\newcommand*\IJSRAnumber{{\scshape proof}}
+\newcommand*\IJSRAtitlefigure{{\color{mygold}\rule{\linewidth}{410pt}}}
 \newcommand*\IJSRAidentifier{\jobname}
-\newbool{bib:nobib}
-
+\newcommand*\yearnumber{\IJSRAyear\,|\,\IJSRAnumber}
 
 
 \DeclareOptionX{draft}{\PassOptionsToClass{\CurrentOption}{scrbook}}
 \DeclareOptionX{month}{\def\IJSRAmonth{#1}}
 \DeclareOptionX{year}{\def\IJSRAyear{#1}}
-\DeclareOptionX{nobib}{\csuse{booltrue}{bib:nobib}}
+\DeclareOptionX{completeissue}{\booltrue{issue}}
 \DeclareOptionX{volume}{\def\IJSRAvolume{Vol.\addspace #1}}
-\DeclareOptionX{number}{\def\IJSRAnumber{No.\addspace #1}}
+\DeclareOptionX{number}{\def\IJSRAnumber{#1}}
 \DeclareOptionX{titlefigure}{\def\IJSRAtitlefigure{\includegraphics[width=\linewidth]{figures/#1}}}
 \DeclareOptionX*{\OptionNotUsed}
 \ProcessOptionsX\relax
@@ -50,23 +55,23 @@
 
 
 \LoadClass[%
+	parskip=half,
 	twoside=true,				% onesite or twoside printing
-	open=right,					% doublepage cleaning ends up right side
+	open=any,					% doublepage cleaning ends up right side
 	chapterprefix=false,		% prefix for chapter marks (Löscht "Kapitel" bei Kapitel)
-%	headings=openany,
-%    headings=optiontohead, 	% \chapter[tocentry={}]{}
+	headings=optiontohead, 	% \chapter[tocentry={}]{}
 	fontsize=11pt,				% font size
 	titlepage=on,				% own page for each title page
 	captions=tableabove,		% display table captions above the float env
 	numbers=noenddot,
 ]{scrbook}%	
-
-\renewcommand\partpagestyle{empty}
-
+								
 \RequirePackage{filecontents}
-\RequirePackage{amsmath}
-\RequirePackage[oldstyle]{libertine}
-\RequirePackage[T1,small,euler-digits]{eulervm}
+\RequirePackage{fontspec}
+%\RequirePackage[osf]{libertine}
+% \RequirePackage{unicode-math}
+\setsansfont{Libertinus Sans}
+\setmainfont[Numbers = {Monospaced, OldStyle}]{Libertinus Serif}
 \defaultfontfeatures[AnonymousPro]
   {
     Extension      = .ttf                       ,
@@ -77,24 +82,19 @@
   }
 \setmonofont[Scale= MatchLowercase]{AnonymousPro}
 
-%\RequirePackage{enumitem}
-
-
-\RequirePackage{url}
-\urlstyle{same}
 \RequirePackage[french, ngerman, spanish, italian, main=english]{babel}
-%\ifxetex\else
 \RequirePackage[%
-%,protrusion=true
-%,expansion=true
+,protrusion=true
+,expansion=true
 ,verbose=true
 ,final=true
 ,letterspace=100
 ,babel=true
 ]{microtype}
-%\fi
 \RequirePackage{colortbl}
 \RequirePackage{abbrevs}
+\RequirePackage[shortlabels]{enumitem}
+
 \RequirePackage{alertmessage}
 \RequirePackage{marginnote}
 \RequirePackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
@@ -104,8 +104,8 @@
 \renewcommand{\LettrineFontHook}{\normalfont}
 \RequirePackage{paralist} % Used for the compactitem environment which makes bullet points with less space between them
 \RequirePackage{currfile}
+\RequirePackage{enumerate}
 \RequirePackage{currfile-abspath}
-
 
 \RequirePackage[
 detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
@@ -125,9 +125,10 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	backend=biber,
 	style=ijsra,
 	]{biblatex}
-\ifbool{bib:nobib}{}{\addbibresource{\jobname.bib}}
+\addbibresource{\jobname.bib}
 
 
+\RequirePackage{etoolbox}
 \RequirePackage{graphicx}
 \graphicspath{{figures/}}
 \RequirePackage{wrapfig} % Paket zur Positionierung einbinden
@@ -136,6 +137,8 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \RequirePackage{xspace}
 \RequirePackage{xcolor}
 \RequirePackage{hologo}
+\RequirePackage{url}
+\urlstyle{same}
 \definecolor{myblue}{rgb}{0,0,51}
 \definecolor{mygold}{RGB}{204,153,51}
 \definecolor{mybluetitle}{RGB}{28,40,65} % HEX 1c2841
@@ -147,6 +150,13 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \RequirePackage{pdfpages}
+
+
+
+\newcommand\submission{}
+\newcommand\acceptance{}
+
+
 %-----------------------------------------
 \RequirePackage[					% page layout modifications
 	paper=a4paper,				% 	- use A4 paper size
@@ -170,21 +180,13 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	textfont=it,
 	up,
 	]{caption} % Custom captions under/above floats in tables or figures
-\RequirePackage[
-    list=true,
-    listformat=default,
-]{subcaption}
-\captionsetup[subfigure]{%
-    %	listformat=subabb,
-    subrefformat=simple,
-    font={footnotesize,sf}, 
-    labelformat=simple,% default (a) |	empty	| simple	a | brace	 a) |parens (a)
-}
+\RequirePackage{subcaption}
 \RequirePackage{setspace}			% for line spacing, e.g. \onehalfspacing
 \RequirePackage{booktabs} % Horizontal rules in tables
-\RequirePackage[super]{nth}
+\RequirePackage{nth}
+\RequirePackage[content={Figure omitted due to faster compiling.}]{draftfigure}
 
-
+	
 \RequirePackage{chngcntr} %Voraussetzung fuer Fussnoten durch alle Kapitel durchnummerieren
 \RequirePackage{listings}
 \AtBeginDocument{\counterwithin{lstlisting}{chapter}}
@@ -194,21 +196,48 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \counterwithout{table}{chapter}
 
 %-------------------------------------------
+\newcommand*{\ijsradate}[1]{\expandafter\@ijsradate#1\@nil} 
+\newcommand*{\@ijsradate}{} 
+\def\@ijsradate#1-#2-#3\@nil{\begingroup
+	\year=#1\relax 
+	\month=#2\relax 
+	\day=#3\relax 
+	% \DayName{#1}{#2}{#3}, % 
+  \today%
+	\endgroup} 
+	
 \RequirePackage[ 
 	headsepline, 
 	draft=false,
 	]{scrlayer-scrpage} 
 \pagestyle{scrheadings}
 \clearscrheadfoot
+\addtokomafont{pageheadfoot}{\normalfont\sffamily\footnotesize}
 
-\lohead[\normalfont\sffamily\footnotesize International Journal of Student Research in Archaeology (IJSRA) \newline 
-\normalfont\sffamily\footnotesize \IJSRAmonth\ \IJSRAyear\ $\bullet$ \IJSRAvolume, \IJSRAnumber \ppages]{\normalfont\sffamily\footnotesize \shorttitle\ \ppages}
-\rehead{\normalfont\sffamily\footnotesize \shortauthor}
-\rohead[{{\vspace{-3em}\includegraphics[width=2cm]{ijsra_logo}}}]{\normalfont\textbf{\sffamily\thepage}}
-\lehead{\normalfont\textbf{\sffamily\thepage}}
-\refoot{\normalfont\sffamily\footnotesize International Journal of Student Research in Archaeology}
-\lofoot{\normalfont\sffamily\footnotesize \IJSRAmonth\ \IJSRAyear\ $\bullet$ \IJSRAvolume,  \IJSRAnumber}
+\lohead{\ifdefempty{\shorttitle}{}{\shorttitle%\ \ifdefempty{\ppages}{}{$\bullet$ \ppages}
+}}
+\rehead{\shortauthor}
+\rohead{\textbf{\thepage}}
+\lehead{\textbf{\thepage}}
+\refoot{International Journal of Student Research in Archaeology}
+\lofoot{\yearnumber}
 \automark[subsection]{section}  
+
+
+\newpairofpagestyles[scrheadings]{ijsrachapter}{\clearscrheadfoot
+\chead{International Journal of Student Research in Archaeology | IJSRA\hfill\yearnumber\\ 
+  \ifdefempty{\submission}{}{submission: \ijsradate{\submission}}
+  \ifdefempty{\acceptance}{}{| acceptance: \ijsradate{\acceptance}}
+  \hfill pp.\,\ppages%
+\marginnote{\vspace{-5em}\includegraphics[width=\linewidth]{ijsra_logo}}}
+}
+
+
+
+\newpairofpagestyles[scrheadings]{part}{\clearscrheadfoot}
+\renewcommand\partpagestyle{part}
+\renewcommand\chapterpagestyle{ijsrachapter}
+
 
 %-----------------------------
 \setkomafont{partnumber}{\normalfont\Huge}
@@ -232,7 +261,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \widowpenalty=10000				% prevent single lines at the end of a paragraph (Hurenkinder)
 \displaywidowpenalty=10000		%
 %-----------------------------------------
-\usepackage[%
+\RequirePackage[%
 	marginal,
 	ragged,%
 	hang, %
@@ -242,8 +271,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \deffootnote{0em}{1em}{{\sffamily\textbf\thefootnotemark}\ }%Ausgabe der Fußnotenziffer in normal
 %--------------------------------------
-
-
+\robustify{\DateMark} % after having loaded abbrevs
 
 
 \ifstr{\KOMAScriptVersion}{2015/07/02 v3.18 KOMA-Script}{%
@@ -253,7 +281,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 }{}
 
 \renewcommand{\marginfont}{\noindent\rule{0pt}{0.7\baselineskip}\color{mygold}\small\sffamily}
-\RequirePackage{marginfix}
+%\RequirePackage{marginfix}
 %-------------------------------------------
 %---Zitate/Quote
 \def\signed #1{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
@@ -271,29 +299,44 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \newcommand\ppages{\pagerange{firstpage\IJSRAidentifier}{lastpage\IJSRAidentifier}}
 \newcommand\shorttitle{}
 \newcommand\maintitle{}
+\newcommand\maintitletoc{\let\\ \relax\maintitle}
 \newcommand\shortauthor{}
 \newcommand\cmail{}
+\newcommand\affiliation{}
+\newcommand\thanknote{}
 
-\renewcommand\AD{{\,AD\xspace}}
-\renewcommand\BC{{\,BC\xspace}}
 
-\patchcmd{\Gin@setfile}{\ttfamily\expandafter\strip@prefix\meaning\@tempa}{\@missingcopyright}{}{}
-\def\@missingcopyright{%
-	\footnotesize\sffamily
-		Figure omitted due to missing copyright.
-		% comment the following line if you don't want to show the file name
-%\expandafter\strip@prefix\meaning\@tempa 
-	}
 
-\undef\keywords{}
+
+\def\keywords{}
 \def\keywordname{Keywords}
 
+\newcommand\mypagesize{\newgeometry{%
+		bindingoffset=0.5cm,			% 	- binding correction
+		top=3cm,							% 	- total body: top margin
+		left=2cm,							% 	- total body: left margin (odd pages)
+		right=2cm,							% 	- total body: right margin (odd pages)
+    marginparwidth=0cm,			% 	- width for side note
+    marginparsep=0cm,				% 	- space between notes and body text (content)
+		bottom=2cm,						% 	- total body: bottom margin
+	}}
+\newcommand\mypartstyle[1]{
+\mypagesize
+\part{#1}
+\restoregeometry}
+
+
+\newcommand\pcref[1]{\parentext{\cref{#1}}}
+
 \newcommand{\IJSRAsection}[1]{%
-	\marginnote{#1}\pdfbookmark[1]{#1}{#1	\IJSRAidentifier	}%
+	\marginnote{#1}\pdfbookmark[1]{#1}{#1\IJSRAidentifier}%
 }
 \newcommand{\IJSRAsubsection}[1]{%
 	\marginnote{#1}\pdfbookmark[2]{#1}{#1\IJSRAidentifier}%
 }
+ \let\ijsrasection\IJSRAsection
+ \let\ijsrasubsection\IJSRAsubsection
+%
 
 \newcommand\authorone{}
 \newcommand\authortwo{}
@@ -320,9 +363,10 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \newcommand\biofive{}
 
 \newcommand\abstract{}
-
-
 \undef\abstract{}
+
+\def\submission{}
+\def\acceptance{}
 
 \undef\authorone{}
 \undef\authortwo{}
@@ -363,47 +407,43 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \newenvironment{IJSRAabstract}
 {\list{}{\rightmargin\leftmargin}%
-\item \footnotesize\sffamily \ifdef\keywords{\textbf{\keywordname :}  \keywords}{}
+\item \footnotesize\sffamily\textbf\keywordname :  \keywords\\
 	\itshape
 	\noindent\item\relax
 	}
 {\endlist}
 
 \newcommand{\IJSRAseparator}{%
-	\vspace{1em}
 	\begin{center}
 	* * *
-	\end{center}
-	\vspace{1em}
-	}
+	\end{center}}
 
-\newcommand{\IJSRAchapter}[1]{%
-	\setcounter{chapter}{1}
-	\chapter*{#1}
-	\addcontentsline{toc}{chapter}{\shortauthor\protect\newline \maintitle}%
-	\pdfbookmark[0]{\shortauthor\ |\ \maintitle}{#1}
-	}
-	
 \newcommand\email{{\normalfont\href{mailto:\cmail}{\cmail}}}
 
 \newbool{@page}
 \newcommand{\pagerange}[2]{%pp.~
 	\edef\tempa{\getpagerefnumber{#1}\booltrue{@page}}%
 	\edef\tempb{\getpagerefnumber{#2}}%
-	\ifboolexpr{bool{@page}}{}{\ $\bullet$ 
-		\tempa--\tempb}
-	}
+	\ifboolexpr{bool{@page}}{}{\tempa--\tempb}}
+	%\ifdefequal{\tempa}{\tempb}{}{
 
 
 \providecommand\IJSRAopening{%
+\ifbool{issue}{}{\begin{document}}
 	\begin{refsection}
-	\bookmarksetup{depth=-1}
 	\setcounter{footnote}{0}
 	\setcounter{table}{0}
 	\setcounter{figure}{0}
 	\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
-	\IJSRAchapter{\maintitle}
-	\begin{center}	
+	\phantomsection
+	\pagestyle{ijsrachapter}
+	\chapter*{\maintitle}
+	% \vspace*{2em}
+%   {\LARGE\sffamily\maintitle}\\[-.3em]
+ \ifbool{issue}{%
+% \pdfbookmark[1]{\shortauthor | \shorttitle}{\shortauthor}
+ \addcontentsline{toc}{chapter}{\normalfont\shortauthor\protect\newline\emph{\maintitletoc}}}{}
+ \begin{center}
 	{\Large\scshape%
 	\authorone\ifdef{\bioone}{{\footnote[1]{\bioone}}}{}%
 	\ifdef{\authortwo}{, \authortwo\ifdef{\biotwo}{{\footnote[2]{\biotwo}}}{}}{}%
@@ -419,12 +459,11 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	\ifdef{\affilfour}{\\ \ifdef{\affilfourauthor}{\textsuperscript{$\affilfourauthor$}}{}\affilfour}{}%
 	\ifdef{\affilfive}{\\ \ifdef{\affilfiveauthor}{\textsuperscript{$\affilfiveauthor$}}{}\affilfive}{}%
 \end{center}
-	\vspace*{2em}
+	\vspace{3em}
 	\pagestyle{scrheadings}	
 	\setcounter{footnote}{0}
 	\renewcommand*{\thefootnote}{\arabic{footnote}}
 	\label{firstpage\IJSRAidentifier}
-
 
 \ifdef\abstract{%
 \begin{IJSRAabstract}
@@ -435,8 +474,8 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 	
 \providecommand\IJSRAclosing{%
-	\IJSRAseparator
-	\printbibliography[heading=subbibliography] 
+\ifbool{nobib}{}{\IJSRAseparator\vspace*{-3em}
+	\printbibliography[heading=subbibliography]}
 	\end{refsection}
 	\label{lastpage\IJSRAidentifier}
 \undef\authorone{}
@@ -458,48 +497,21 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 \undef\affilfiveauthor{}
 
 \undef\abstract{}
-\undef\keywords{}
+
+\def\submission{}
+\def\acceptance{}
+
 \undef\bioone{}
 \undef\biotwo{}
 \undef\biothree{}
 \undef\biofour{}
 \undef\biofive{}
-	}
-\providecommand\IJSRAclosingclean{%
-    \printbibliography[heading=subbibliography] 
-\end{refsection}
-\label{lastpage\IJSRAidentifier}
-\undef\authorone{}
-\undef\authortwo{}
-\undef\authorthree{}
-\undef\authorfour{}
-\undef\authorfive{}
-
-\undef\affilone{}
-\undef\affiltwo{}
-\undef\affilthree{}
-\undef\affilfour{}
-\undef\affilfive{}
-
-\undef\affiloneauthor{}
-\undef\affiltwoauthor{}
-\undef\affilthreeauthor{}
-\undef\affilfourauthor{}
-\undef\affilfiveauthor{}
-
-\undef\abstract{}
-\undef\keywords{}
-\undef\bioone{}
-\undef\biotwo{}
-\undef\biothree{}
-\undef\biofour{}
-\undef\biofive{}
-}
-
+\ifbool{issue}{}{\end{document}}}
 
 \def\Put(#1,#2)#3{\makebox(0,0){\put(#1,#2){#3}}}
 
 \def\IJSRAtitlepage{%
+\pdfbookmark[1]{Titlepage}{title}
 \definecolor{mybluetitle}{RGB}{28,40,65} % HEX 1c2841
 \newgeometry{%
 	head=0cm,			% 	- no header
@@ -512,13 +524,12 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	marginparwidth=0cm,			% 	- width for side note
 }
 \thispagestyle{empty}
-	\pdfbookmark[0]{Cover}{Cover}
 \pagecolor{mybluetitle}
-\Put(-11,-450){\IJSRAtitlefigure}\\
-\Put(-11,-450){\color{white}\rule{1.5\linewidth}{15pt}}
-\Put(.5\linewidth-3.5cm,-1.1\linewidth){\includegraphics[width=7cm]{ijsra_logo.png}}\\
+\Put(0,-.85\textheight+5.3cm){\IJSRAtitlefigure}\\
+\Put(0,-.85\textheight+6cm){\color{mygold}\rule{1.5\linewidth}{5pt}}
+\Put(.5\linewidth-3.5cm,-.85\textheight){\includegraphics[width=7cm]{ijsra_logo.png}}\\
 
-\vspace*{15cm}
+\vspace{.6\linewidth}
 \begin{center}\color{white}
 \fontsize{40}{40}\selectfont
 International Journal of \\ 
@@ -527,8 +538,8 @@ Archaeology
 
 \vfill
 \fontsize{15}{15}\selectfont
-\IJSRAvolume\ | \IJSRAnumber\\
-\IJSRAmonth\ \IJSRAyear
+ISSN: 2398-2012\\
+Issue \IJSRAnumber\,|\,\IJSRAmonth\ \IJSRAyear
 
 \vspace{2em}
 {ijsra.org}
@@ -594,6 +605,7 @@ Archaeology
 
 \RequirePackage{hyperref} % For hyperlinks in the PDF
 \hypersetup{					% setup the hyperref-package options
+	unicode,
 	colorlinks   = true, %Colours links instead of ugly boxes
 	urlcolor     =  myblue, %Colour for external hyperlinks
 	linkcolor    = myblue, %Colour of internal links
@@ -601,15 +613,14 @@ Archaeology
 	linktoc=page,
 	pdfborder={0 0 0},			% 	-
 	breaklinks=true,			% 	- allow line break inside links
-	bookmarksnumbered=true,		%
-	bookmarksopenlevel=0,
-	bookmarksopen=true,		%
+	% bookmarksnumbered=true,		%
+	 bookmarksopenlevel=2,
+	% bookmarksopen=false,		%
+	% bookmarks=true,
 	final=true	% = true, only with web-Documents!!
 }
 \RequirePackage{bookmark}
-
 \RequirePackage{cleveref}
 
-%\AtBeginDocument\IJSRAopening
-%\AtEndDocument\IJSRAclosing
-%\endinput
+
+\endinput

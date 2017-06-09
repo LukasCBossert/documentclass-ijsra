@@ -8,7 +8,8 @@
 %--------Author’s names------------
 \def\authorone{Lukas C. Bossert}
 %-------Biographical information-------------
-\def\bioone{The coding of this documentclass is done at \href{https://github.com/LukasCBossert/documentclass-ijsra}{https://github.com/LukasCBossert/documentclass-ijsra} }
+\def\bioone{The coding of this documentclass is done at \href{https://github.com/LukasCBossert/documentclass-ijsra}{https://github.com/LukasCBossert/documentclass-ijsra} 
+\alertwarning{Please know that this documentation may be deprecated since all developments are written down it the wiki of the journal’s repository: \url{https://github.com/LukasCBossert/ijsra/wiki}.}}
 %-------Title-------------
 \def\maintitle{The \texttt{ijsra}-class, Version \IJSRAversion\ -- \IJSRAversiondate}
 \def\shorttitle{\maintitle}
@@ -17,7 +18,7 @@
  Read this documentation carefully.
  When you start editing do it according to the structure shown in \cref{document}.}
 %------University/Institution--------------
-\def\affilone{Humboldt-Universität zu Berlin | Excellence-Cluster Topoi}
+\def\affilone{digitales-altertum|de}
 %--------Email------------
 \def\cmail{lukas@digitales-altertum.de}
 %\def\keywordname{}
@@ -63,7 +64,6 @@
 
 \end{filecontents}
 
-\begin{document}
 \lstMakeShortInline[style=code]|
 \IJSRAopening
 
@@ -296,8 +296,7 @@ For that we edited a special form a separation mark.
 You can use it with |\IJSRAseparator|.
 \IJSRAseparator
 There  \IJSRAsection{figures}are two ways to insert a figure into the text.
-\begin{enumerate}
-\item by using the plain enviroment |figure|
+First by using the plain enviroment |figure|
 
 \begin{lstlisting}[label=figure,caption={figure}]
 \begin{figure}
@@ -308,7 +307,7 @@ There  \IJSRAsection{figures}are two ways to insert a figure into the text.
 \end{figure}
 \end{lstlisting}
 
-\item by using the enhanced enviroment |wrapfigure| 
+Second by using the enhanced enviroment |wrapfigure| 
 
 \begin{lstlisting}[label=wrapfigure,caption={wrapfigure}]
 \begin{wrapfigure}{O}{0.5\textwidth} 
@@ -319,7 +318,6 @@ There  \IJSRAsection{figures}are two ways to insert a figure into the text.
 \label{fig:NAME_OF_THE_FIGURE_WITHOUT_SUFFIX}
 \end{wrapfigure} 
 \end{lstlisting}
-\end{enumerate}
 Since you (hopefully) place the figures into the folder named |figures| there is no need to tell the path, the figure name is sufficient. 
 \IJSRAseparator
 When suitable \IJSRAsection{caption}we try to insert figures as a |wrapefigure| into the text.
@@ -417,9 +415,6 @@ please have a look at the documentation of \texttt{biblatex-ijsra}.\footnote{\ci
 
 \IJSRAclosing
 
-\clearpage
-You find the code using to write this documentation below.
-
-
+%\clearpage
+%You find the code using to write this documentation below.
 %\lstinputlisting[language={[AlLaTeX]{TeX}}]{\jobname.tex}
-\end{document}

@@ -1,9 +1,9 @@
 document class __ijsra__    
 ======= 
 
-_2016/09/18 v0.4_
+_2017/06/09 v1.0_
 
-Copyright (c) 2016 Lukas C. Bossert 
+Copyright (c) 2017 Lukas C. Bossert 
 
 Email: [lukas@digitales-altertum.de](mailto:lukas@digitales-altertum.de)
 
