@@ -20,8 +20,8 @@
 \RequirePackage{ifxetex,ifluatex,ifpdf,ifvtex}
 \RequirePackage{xkeyval,etoolbox}
 
-\def\IJSRAversion{1.0}
-\def\IJSRAversiondate{2017/06/09}
+\def\IJSRAversion{1.1}
+\def\IJSRAversiondate{2017/07/24}
 
 \newbool{issue}
 \newbool{nobib}
@@ -121,6 +121,25 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 	strict=true,					
 	style=english,					
 ]{csquotes}
+
+\renewcommand*{\mkccitation}[1]{ (#1)}
+\renewcommand*{\mkcitation}[1]{ (#1)}
+
+\renewenvironment{quote}
+  {%\small
+	\list{}{\rightmargin=0em \leftmargin=2em}%
+   \item\relax}
+  {\endlist}
+\newenvironment{IJSRAquote}[1]%
+{\begin{quote}
+\alertwarning{\sffamily THIS FEATURE IS DEPRECATED!\newline
+Use \textbackslash blockcquote or \textbackslash foreignblockcquote. \newline
+See the documentation online.}
+}
+	{\end{quote}}	
+
+%-------------------------------------------
+	
 \RequirePackage[					%% use  for bibliography
 	backend=biber,
 	style=ijsra,
@@ -282,19 +301,7 @@ detect-all, %Zahlen werden in der aktuellen Schrift angezeigt
 
 \renewcommand{\marginfont}{\noindent\rule{0pt}{0.7\baselineskip}\color{mygold}\small\sffamily}
 %\RequirePackage{marginfix}
-%-------------------------------------------
-%---Zitate/Quote
-\def\signed #1{\leavevmode\unskip\nobreak\hfil\penalty50\hskip2em
-	\hbox{}\nobreak\hfil%
-	---#1%
-	\parfillskip=0pt \finalhyphendemerits=0 \endgraf}
-
-\newsavebox\mybox
-\newenvironment{IJSRAquote}[1]%
-{\savebox\mybox{#1}\begin{quote}}
-	{\signed{\usebox\mybox}\end{quote}}
-
-\appto\quote{\normalsize\singlespacing}
+%\appto\quote{\normalsize\singlespacing}
 %-----------------------------------------
 \newcommand\ppages{\pagerange{firstpage\IJSRAidentifier}{lastpage\IJSRAidentifier}}
 \newcommand\shorttitle{}

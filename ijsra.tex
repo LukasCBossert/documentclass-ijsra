@@ -27,6 +27,28 @@
 
 
 \begin{filecontents}{\IJSRAidentifier.bib}
+
+	@Book{Winckelmann2006,
+	  title      = {History of the Art of Antiquity},
+	  publisher  = {Getty Research Institute},
+	  year       = {2006},
+	  author     = {Winckelmann, J. J.},
+	  location    = {Los Angeles},
+	  origdate   = {1764},
+		related = {Winckelmann1764},
+		relatedtype = {translationof},
+	  translator = {Mallgrave, Harry Francis},
+	}
+
+	@Book{Winckelmann1764,
+	  title     = {Geschichte der Kunst des Alterthums},
+	  publisher = {Walther},
+	  year      = {1764},
+	  author    = {Winckelmann, J. J.},
+	  location   = {Dresden},
+	}
+	
+	
 @Incollection{Orengo2015,
   author       = {Orengo, H.},
   title        = {Open Source GIS and Geospatial Software in Archaeology},
@@ -184,6 +206,26 @@ Those are written in the section
 .
 .
 .
+	@Book{Winckelmann2006,
+	  title      = {History of the Art of Antiquity},
+	  publisher  = {Getty Research Institute},
+	  year       = {2006},
+	  author     = {Winckelmann, J. J.},
+	  location    = {Los Angeles},
+	  origdate   = {1764},
+		related = {Winckelmann1764},
+		relatedtype = {translationof},
+	  translator = {Mallgrave, Harry Francis},
+	}
+
+	@Book{Winckelmann1764,
+	  title     = {Geschichte der Kunst des Alterthums},
+	  publisher = {Walther},
+	  year      = {1764},
+	  author    = {Winckelmann, J. J.},
+	  location   = {Dresden},
+	}
+	
 
 \end{filecontents}
 \end{lstlisting}
@@ -272,22 +314,21 @@ Quotes are inserted between the enviroment |IJSRAquote|.
 Let me give you an example:
 
 \begin{lstlisting}[label=quote,caption={Quote}]
-\begin{IJSRAquote}{Johann Joachim Winckelmann}
-Grace can never properly be said to exist without beauty; 
-for it is only in the elegant proportions of beautiful forms 
-that can be found that harmonious variety of line and motion 
-which is the essence and charm of grace.
-\end{IJSRAquote}
+\blockcquote[see][112]{Winckelmann2006}{Grace can never properly be said to exist without beauty; for it is only in the elegant proportions of beautiful forms that can be found that harmonious variety of line and motion which is the essence and charm of grace.}
 \end{lstlisting}
 It will be displayed as this:
  
-\begin{IJSRAquote}{Johann Joachim Winckelmann}
-Grace can never properly be said to exist without beauty; 
-for it is only in the elegant proportions of beautiful forms 
-that can be found that harmonious variety of line and motion 
-which is the essence and charm of grace.
-\end{IJSRAquote}
-Of course you can also use |\cite[page]{bibtex-key}| for the author of the quote.
+ 
+\blockcquote[see][112]{Winckelmann2006}{Grace can never properly be said to exist without beauty; for it is only in the elegant proportions of beautiful forms that can be found that harmonious variety of line and motion which is the essence and charm of grace.}
+
+There is also a way to cite foreigntext-quotes:
+\begin{lstlisting}[label=quoteforeign,caption={Quote}]
+\foreignblockcquote{ngerman}[see][12]{Winckelmann1764}{Es kann leichter von der Schönheit gesagt werden, was sie nicht ist, als was sie ist; und es verhält sich einigermaßen mit der Schönheit und ihrem Gegenteile, wie mit Gesundheit und Krankheit: diese fühlen wir und jene nicht.}
+\end{lstlisting}
+\foreignblockcquote{ngerman}[see][12]{Winckelmann1764}{Es kann leichter von der Schönheit gesagt werden, was sie nicht ist, als was sie ist; und es verhält sich einigermaßen mit der Schönheit und ihrem Gegenteile, wie mit Gesundheit und Krankheit: diese fühlen wir und jene nicht.}
+
+Of course you can also use |\blockquote[Author]{QUOTE}| for a not-citable author of the quote. 
+Same for |\foreignblockquote[Author]{QUOTE}| 
 
 \IJSRAseparator
 You can\IJSRAsection{separator} insert a separation mark between some paragraphs,
@@ -399,18 +440,18 @@ The title figure has to be within the folder |figures| and be in an aspect ratio
 
 \IJSRAseparator
 Some general information:
-\begin{itemize}
-\item Be aware of different brackets, e.g. |[] {}|;
-These are part of \LaTeX -programming-language, every opening bracket needs a closing one.
-\item Replace e.g. |19 %| with |\SI{19}{\percent}| otherwise everything after |%| will be omitted by \LaTeX;
-\item Replace |&| with |\&|; 
-\item Replace the citation of authors (e.g |Blesser \& Salter 2006|) with |\cite{Blesser2006}|;
-	 if you have a page-range write: 	|\cite[23--45]{Blesser2006}|;
-\item To compile with bibliography-references;
-use 1 $\times$ \hologo{XeLaTeX}, then 1 $\times$ compiler ›biber‹, then 1 $\times$ \hologo{XeLaTeX}.
-\item If you want to know how to cite properly
-please have a look at the documentation of \texttt{biblatex-ijsra}.\footnote{\cite[see][]{Bossert-ijsra};\\ \url{http://mirrors.ctan.org//macros/latex/contrib/biblatex-contrib/biblatex-ijsra/biblatex-ijsra.pdf}}
-\end{itemize}
+% \begin{itemize}
+% \item Be aware of different brackets, e.g. |[] {}|;
+% These are part of \LaTeX -programming-language, every opening bracket needs a closing one.
+% \item Replace e.g. |19 %| with |\SI{19}{\percent}| otherwise everything after |%| will be omitted by \LaTeX;
+% \item Replace |&| with |\&|;
+% \item Replace the citation of authors (e.g |Blesser \& Salter 2006|) with |\cite{Blesser2006}|;
+% 	 if you have a page-range write: 	|\cite[23--45]{Blesser2006}|;
+% \item To compile with bibliography-references;
+% use 1 $\times$ \hologo{XeLaTeX}, then 1 $\times$ compiler ›biber‹, then 1 $\times$ \hologo{XeLaTeX}.
+% \item If you want to know how to cite properly
+% please have a look at the documentation of \texttt{biblatex-ijsra}.\footnote{\cite[see][]{Bossert-ijsra};\\ \url{http://mirrors.ctan.org//macros/latex/contrib/biblatex-contrib/biblatex-ijsra/biblatex-ijsra.pdf}}
+% \end{itemize}
 \nocite{*}
 
 \IJSRAclosing
